@@ -1,22 +1,25 @@
 import java.util.*;
 
 public class RailwayBooking {
-    DataBase db = new DataBase();
+    private DataBase db = new DataBase();
     public boolean isFind = false;
     public List<Passenger> tempPassengers = new ArrayList<>();
 
-    public String bookTheTicket(String name, String gender, int age, String berthPreference, String classType, String from, String to) {
+    public boolean bookTheTicket(String name, String gender, int age, String berthPreference, String classType, String from, String to,String trainName) {
         List<Train> availableTrains = checkTrains(from, to);
+       
         for (Train t : availableTrains) {
-            if (isSeatAvailable(t, classType)) {
-                bookSeat(t, classType);
-                Passenger newPassenger = new Passenger(name, gender, age, berthPreference, classType);
-                db.passengers.add(newPassenger);
-                return "Ticket booked successfully for " + name;
+            if (trainName.equals(t.getTrainName())) {
+                if (isSeatAvailable(t, classType)) {
+                    bookSeat(t, classType);
+                    Passenger newPassenger = new Passenger(name, gender, age, berthPreference, classType);
+                    db.passengers.add(newPassenger);
+                    return true;
+                }
             }
         }
         tempPassengers.add(new Passenger(name, gender, age, berthPreference, classType));
-        return "Sorry, you are on the waiting list";
+        return false;
     }
 
     private boolean isSeatAvailable(Train train, String classType) {
@@ -63,22 +66,28 @@ public class RailwayBooking {
         return tempTrain;
     }
 
-    public String cancelTheTicket(String name) {
+    public boolean cancelTheTicket(String name) {
         for (Passenger e : db.getPassengers()) {
             if (name.equals(e.getNameOfThePassenger())) {
                 db.passengers.remove(e);
-                return "Your ticket is cancelled for " + name;
+                return true;
             }
         }
-        return "Your ticket is not available in our database";
+        return false;
     }
 
-    public String moveTicketStatus() {
+    public boolean moveTicketStatus() {
         if (!tempPassengers.isEmpty()) {
             Passenger passenger = tempPassengers.remove(0);
             db.passengers.add(passenger);
-            return passenger.getNameOfThePassenger() + "'s ticket is confirmed";
+            return true;
         }
-        return "No passengers in the waiting list";
+        return false;
+    }
+    public String getLastPassengerName() {
+        if (!db.getPassengers().isEmpty()) {
+            return db.getPassengers().get(db.getPassengers().size() - 1).getNameOfThePassenger();
+        }
+        return null;
     }
 }

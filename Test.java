@@ -18,6 +18,8 @@ public class Test {
                     List<Train> trains = p.checkTrains(from, to);
                     if (p.isFind) {
                         System.out.println(trains);
+                        System.out.println("enter train name");
+                        String trainName = input.nextLine();
                         System.out.println("Enter name:");
                         String name = input.nextLine();
                         System.out.println("Enter age:");
@@ -25,12 +27,18 @@ public class Test {
                         input.nextLine();  
                         System.out.println("Enter gender:");
                         String gender = input.nextLine();
-                        System.out.println("Enter berth preference:");
+                        System.out.println("Enter berth preference: 1.Upper  2.lower   3.side upper  4.side lower");
                         String preference = input.nextLine();
-                        System.out.println("enter classType:");
+                        System.out.println("enter classType 1.SL    2.3A    3.2A    4.1A");
                         String classType = input.nextLine();
-                        String result = p.bookTheTicket(name, gender, age, preference,classType,from,to);
-                        System.out.println(result);
+                        
+                        boolean result = p.bookTheTicket(name, gender, age, preference,classType,from,to,trainName);
+                        if (result) {
+                            System.out.println("Ticket booked successfully "+ name);
+                        }
+                        else {
+                            System.out.println("Sorry, you are on the waiting list");
+                        }
                     } 
                     else {
                         System.out.println("Sorry, train not found");
@@ -39,8 +47,20 @@ public class Test {
                 case "2":
                     System.out.println("Enter name to cancel:");
                     String name = input.nextLine();
-                    String result = p.cancelTheTicket(name);
-                    System.out.println(result);
+                    boolean result = p.cancelTheTicket(name);
+                    if (result) {
+                        System.out.println("Your ticket is cancelled for " + name);
+                    }
+                    else {
+                         System.out.println("Your ticket is not available in our database");
+                    }
+                    boolean movResult = p.moveTicketStatus();
+                    if (movResult) {
+                        String n = p.getLastPassengerName();
+                        System.out.println(n + ", your ticket is confirmed");
+                    } else {
+                        System.out.println("No passengers in the waiting list");
+                    }
                     break;
                 case "3":
                     System.out.println("Exiting");
