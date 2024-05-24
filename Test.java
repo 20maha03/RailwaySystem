@@ -7,7 +7,7 @@ public class Test {
         Scanner input = new Scanner(System.in);
 
         while (true) {
-            System.out.println("1.Book 2.Cancel 3.Exit");
+            System.out.println("1.Book 2.Cancel 3.view ticket 4.Exit");
             String str = input.nextLine();
             switch (str) {
                 case "1":
@@ -16,8 +16,11 @@ public class Test {
                     System.out.println("Enter to station:");
                     String to = input.nextLine();
                     List<Train> trains = p.checkTrains(from, to);
-                    if (p.isFind) {
-                        System.out.println(trains);
+                    if (trains.size() > 0) {
+                        System.out.println("available trains are"); 
+                        for (Train t : trains) {
+                            System.out.println(t);
+                        }
                         System.out.println("enter train name");
                         String trainName = input.nextLine();
                         System.out.println("Enter name:");
@@ -27,7 +30,7 @@ public class Test {
                         input.nextLine();  
                         System.out.println("Enter gender:");
                         String gender = input.nextLine();
-                        System.out.println("Enter berth preference: 1.Upper  2.lower   3.side upper  4.side lower");
+                        System.out.println("Enter berth preference: 1.UB  2.LW   3.SU  4.SL");
                         String preference = input.nextLine();
                         System.out.println("enter classType 1.SL    2.3A    3.2A    4.1A");
                         String classType = input.nextLine();
@@ -62,7 +65,10 @@ public class Test {
                         System.out.println("No passengers in the waiting list");
                     }
                     break;
-                case "3":
+                case "3" :
+                    System.out.println("Booked tickes");
+                    System.out.println(p.bookedTickets);
+                case "4":
                     System.out.println("Exiting");
                     input.close();
                     return;

@@ -88,15 +88,15 @@ public class Train {
     @Override
     public String toString() {
         return
-                "fromStation= " + fromStation  +
-                " toStation= " + toStation + 
-                " totalSeats= " + totalSeats +
-                " trainName= " + trainName +
-                "Availabe seat count " +
-                " SL : " + countOfSL +
-                " 3A : " + countOf3A +
-                " 2A : " +countOf2A +
-                " 1A : " + countOf1A; 
+                "fromStation = " + fromStation  +
+                " toStation = " + toStation + 
+                " totalSeats = " + totalSeats +
+                " trainName = " + trainName +
+                " Availabe seat count " +
+                " SL = " + countOfSL +
+                "    3A = " + countOf3A +
+                "    2A = " +countOf2A +
+                "    1A = " + countOf1A; 
 
                 
     }

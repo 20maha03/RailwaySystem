@@ -56,10 +56,10 @@ public class Passenger {
         
         @Override
         public String toString() {
-            return "name : " + getNameOfThePassenger() +
-                    " age : " + getAgeOfThePassenger() +
-                    " gender : " + getGenderOfThePassenger() +
-                    " berth preference : " + getBerthPreference() +
-                    " class type : " + getClassType();
+            return "name = " + getNameOfThePassenger() +
+                    " age = " + getAgeOfThePassenger() +
+                    " gender = " + getGenderOfThePassenger() +
+                    " berth preference = " + getBerthPreference() +
+                    " class type = " + getClassType();
         }
 }

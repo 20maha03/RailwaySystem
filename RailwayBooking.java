@@ -1,10 +1,12 @@
 import java.util.*;
 
 public class RailwayBooking {
-    private DataBase db = new DataBase();
-    public boolean isFind = false;
-    public List<Passenger> tempPassengers = new ArrayList<>();
 
+    private DataBase db = new DataBase();
+    public List<Passenger> tempPassengers = new ArrayList<>();
+    public HashMap <String,Integer> bookedTickets = new HashMap<>();
+    int seatNumber = 1;
+    int count = 1;
     public boolean bookTheTicket(String name, String gender, int age, String berthPreference, String classType, String from, String to,String trainName) {
         List<Train> availableTrains = checkTrains(from, to);
        
@@ -14,6 +16,9 @@ public class RailwayBooking {
                     bookSeat(t, classType);
                     Passenger newPassenger = new Passenger(name, gender, age, berthPreference, classType);
                     db.passengers.add(newPassenger);
+                    String ticketKey = generateTicketKey(to, classType, seatNumber++, berthPreference);
+                    System.out.println("Ticket id: "+ticketKey);
+                    bookedTickets.put(ticketKey,count++);
                     return true;
                 }
             }
@@ -55,11 +60,9 @@ public class RailwayBooking {
     }
 
     public List<Train> checkTrains(String from, String to) {
-        isFind = false;
         List<Train> tempTrain = new ArrayList<>();
         for (Train t : db.getTrains()) {
             if (t.getFromStation().equals(from) && t.getToStation().equals(to)) {
-                isFind = true;
                 tempTrain.add(t);
             }
         }
@@ -89,5 +92,9 @@ public class RailwayBooking {
             return db.getPassengers().get(db.getPassengers().size() - 1).getNameOfThePassenger();
         }
         return null;
+    }
+
+    private String generateTicketKey(String destination, String classType, int seatNumber, String berthPreference) {
+        return destination + "/" + classType + "/" + seatNumber + "/" + berthPreference;
     }
 }
