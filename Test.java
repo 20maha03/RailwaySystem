@@ -7,7 +7,7 @@ public class Test {
         Scanner input = new Scanner(System.in);
 
         while (true) {
-            System.out.println("1.Book 2.Cancel 3.view ticket 4.Exit");
+            System.out.println("1.Book 2.Cancel 3.View Last Booked Passenger 4.Exit");
             String str = input.nextLine();
             switch (str) {
                 case "1":
@@ -17,64 +17,50 @@ public class Test {
                     String to = input.nextLine();
                     List<Train> trains = p.checkTrains(from, to);
                     if (trains.size() > 0) {
-                        System.out.println("available trains are"); 
+                        System.out.println("Available trains are:");
                         for (Train t : trains) {
                             System.out.println(t);
                         }
-                        System.out.println("enter train name");
+                        System.out.println("Enter train name:");
                         String trainName = input.nextLine();
                         System.out.println("Enter name:");
                         String name = input.nextLine();
                         System.out.println("Enter age:");
                         int age = input.nextInt();
-                        input.nextLine();  
+                        input.nextLine();
                         System.out.println("Enter gender:");
                         String gender = input.nextLine();
-                        System.out.println("Enter berth preference: 1.UB  2.LW   3.SU  4.SL");
-                        String preference = input.nextLine();
-                        System.out.println("enter classType 1.SL    2.3A    3.2A    4.1A");
-                        String classType = input.nextLine();
-                        
-                        boolean result = p.bookTheTicket(name, gender, age, preference,classType,from,to,trainName);
-                        if (result) {
-                            System.out.println("Ticket booked successfully "+ name);
+                        System.out.println("Enter berth preference: 1.UB, 2.MB, 3.LB, 4.SU, 5.SL");
+                        String berthPreference = input.nextLine();
+                        System.out.println("Enter class type: SL, A3, A2, A1");
+                        ClassType classType = ClassType.valueOf(input.nextLine());
+                        if (p.bookTheTicket(name, gender, age, berthPreference, classType, from, to, trainName)) {
+                            System.out.println("Ticket booked successfully.");
+                        } else {
+                            System.out.println("Booking failed. Added to waiting list.");
                         }
-                        else {
-                            System.out.println("Sorry, you are on the waiting list");
-                        }
-                    } 
-                    else {
-                        System.out.println("Sorry, train not found");
+                    } else {
+                        System.out.println("No trains available for the given route.");
                     }
                     break;
                 case "2":
-                    System.out.println("Enter name to cancel:");
-                    String name = input.nextLine();
-                    boolean result = p.cancelTheTicket(name);
-                    if (result) {
-                        System.out.println("Your ticket is cancelled for " + name);
-                    }
-                    else {
-                         System.out.println("Your ticket is not available in our database");
-                    }
-                    boolean movResult = p.moveTicketStatus();
-                    if (movResult) {
-                        String n = p.getLastPassengerName();
-                        System.out.println(n + ", your ticket is confirmed");
+                    System.out.println("Enter the name of the passenger to cancel:");
+                    String cancelName = input.nextLine();
+                    if (p.cancelTheTicket(cancelName)) {
+                        System.out.println("Ticket cancelled successfully.");
                     } else {
-                        System.out.println("No passengers in the waiting list");
+                        System.out.println("Cancellation failed. Passenger not found.");
                     }
                     break;
-                case "3" :
-                    System.out.println("Booked tickes");
-                    System.out.println(p.bookedTickets);
+                case "3":
+                    System.out.println("Last booked passenger's name: " + p.getLastPassengerName());
+                    break;
                 case "4":
-                    System.out.println("Exiting");
+                    System.out.println("Exiting...");
                     input.close();
                     return;
                 default:
-                    System.out.println("Invalid option");
-                    break;
+                    System.out.println("Invalid option. Please try again.");
             }
         }
     }
