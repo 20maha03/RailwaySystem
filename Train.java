@@ -1,22 +1,27 @@
-import java.util.*;
+import java.util.EnumMap;
 
 public class Train {
+
     private String fromStation;
     private String toStation;
     private int totalSeats;
     private String trainName;
-    private EnumMap<ClassType, Integer> seatCounts;
+    private EnumMap<ClassType, EnumMap<BerthPreference, Integer>> seatCounts;
 
-    public Train(String fromStation, String toStation, int totalSeats, String trainName, int countOfSL, int countOfA3, int countOfA2, int countOfA1) {
+    public Train(String fromStation, String toStation, int totalSeats, String trainName) {
         this.fromStation = fromStation;
         this.toStation = toStation;
         this.totalSeats = totalSeats;
         this.trainName = trainName;
         this.seatCounts = new EnumMap<>(ClassType.class);
-        seatCounts.put(ClassType.SL, countOfSL);
-        seatCounts.put(ClassType.A3, countOfA3);
-        seatCounts.put(ClassType.A2, countOfA2);
-        seatCounts.put(ClassType.A1, countOfA1);
+
+        for (ClassType classType : ClassType.values()) {
+            EnumMap<BerthPreference, Integer> berthMap = new EnumMap<>(BerthPreference.class);
+            for (BerthPreference bp : BerthPreference.values()) {
+                berthMap.put(bp, 2); 
+            }
+            seatCounts.put(classType, berthMap);
+        }
     }
 
     public String getFromStation() {
@@ -35,24 +40,29 @@ public class Train {
         return trainName;
     }
 
-    public int getSeatCount(ClassType classType) {
-        return seatCounts.getOrDefault(classType, 0);
+    public int getSeatCount(ClassType classType, BerthPreference berthPreference) {
+        return seatCounts.get(classType).getOrDefault(berthPreference, 0);
     }
 
-    public void setSeatCount(ClassType classType, int count) {
-        seatCounts.put(classType, count);
+    public void setSeatCount(ClassType classType, BerthPreference berthPreference, int count) {
+        seatCounts.get(classType).put(berthPreference, count);
     }
 
     @Override
     public String toString() {
-        return 
-                "fromStation='" + fromStation + 
-                ", toStation='" + toStation + 
-                ", totalSeats=" + totalSeats +
-                ", trainName='" + trainName + 
-                ", SL=" + seatCounts.get(ClassType.SL) +
-                ", A3=" + seatCounts.get(ClassType.A3) +
-                ", A2=" + seatCounts.get(ClassType.A2) +
-                ", A1=" + seatCounts.get(ClassType.A1) ;               
+        StringBuilder sb = new StringBuilder();
+        sb.append("fromStation = ").append(fromStation)
+                .append(" toStation = ").append(toStation)
+                .append(" totalSeats = ").append(totalSeats)
+                .append(" trainName = ").append(trainName)
+                .append(" Available seat counts:");
+        for (ClassType ct : ClassType.values()) {
+            sb.append(" ").append(ct).append(" {");
+            for (BerthPreference bp : BerthPreference.values()) {
+                sb.append(" ").append(bp).append(" = ").append(seatCounts.get(ct).get(bp));
+            }
+            sb.append(" }");
+        }
+        return sb.toString();
     }
 }

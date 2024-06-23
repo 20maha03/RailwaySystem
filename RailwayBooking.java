@@ -8,19 +8,31 @@ public class RailwayBooking {
     int seatNumber = 1;
     int count = 1;
 
-    public boolean bookTheTicket(String name, String gender, int age, String berthPreference,ClassType classType, String from, String to, String trainName) {
+    public boolean bookTheTicket(String name, String gender, int age, BerthPreference berthPreference, ClassType classType, String from, String to, String trainName) {
         List<Train> availableTrains = checkTrains(from, to);
 
         for (Train t : availableTrains) {
             if (trainName.equals(t.getTrainName())) {
-                if (isSeatAvailable(t, classType)) {
-                    bookSeat(t, classType);
+                if (isSeatAvailable(t, classType, berthPreference)) {
+                    bookSeat(t, classType, berthPreference);
                     Passenger newPassenger = new Passenger(name, gender, age, berthPreference, classType);
                     db.passengers.add(newPassenger);
                     String ticketKey = generateTicketKey(to, classType, seatNumber++, berthPreference);
                     System.out.println("Ticket id: " + ticketKey);
                     bookedTickets.put(ticketKey, count++);
                     return true;
+                } else {
+                    for (BerthPreference bp : BerthPreference.values()) {
+                        if (bp != berthPreference && isSeatAvailable(t, classType, bp)) {
+                            bookSeat(t, classType, bp);
+                            Passenger newPassenger = new Passenger(name, gender, age, bp, classType);
+                            db.passengers.add(newPassenger);
+                            String ticketKey = generateTicketKey(to, classType, seatNumber++, bp);
+                            System.out.println("Ticket id: " + ticketKey);
+                            bookedTickets.put(ticketKey, count++);
+                            return true;
+                        }
+                    }
                 }
             }
         }
@@ -28,12 +40,12 @@ public class RailwayBooking {
         return false;
     }
 
-    private boolean isSeatAvailable(Train train, ClassType classType) {
-        return train.getSeatCount(classType) > 0;
+    private boolean isSeatAvailable(Train train, ClassType classType, BerthPreference berthPreference) {
+        return train.getSeatCount(classType, berthPreference) > 0;
     }
 
-    private void bookSeat(Train train,ClassType classType) {
-        train.setSeatCount(classType, train.getSeatCount(classType) - 1);
+    private void bookSeat(Train train, ClassType classType, BerthPreference berthPreference) {
+        train.setSeatCount(classType, berthPreference, train.getSeatCount(classType, berthPreference) - 1);
     }
 
     public List<Train> checkTrains(String from, String to) {
@@ -65,14 +77,14 @@ public class RailwayBooking {
         return false;
     }
 
-    public List<Passenger> getLastPassengerName() {
+    public String getLastPassengerName() {
         if (!db.getPassengers().isEmpty()) {
-           return db.getPassengers();
+            return db.getPassengers().get(db.getPassengers().size() - 1).getNameOfThePassenger();
         }
         return null;
     }
 
-    private String generateTicketKey(String destination, ClassType classType, int seatNumber, String berthPreference) {
+    private String generateTicketKey(String destination, ClassType classType, int seatNumber, BerthPreference berthPreference) {
         return destination + "/" + classType + "/" + seatNumber + "/" + berthPreference;
     }
 }

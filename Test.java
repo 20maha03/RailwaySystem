@@ -31,7 +31,8 @@ public class Test {
                         System.out.println("Enter gender:");
                         String gender = input.nextLine();
                         System.out.println("Enter berth preference: 1.UB, 2.MB, 3.LB, 4.SU, 5.SL");
-                        String berthPreference = input.nextLine();
+        
+                        BerthPreference berthPreference = BerthPreference.valueOf(input.nextLine());
                         System.out.println("Enter class type: SL, A3, A2, A1");
                         ClassType classType = ClassType.valueOf(input.nextLine());
                         if (p.bookTheTicket(name, gender, age, berthPreference, classType, from, to, trainName)) {

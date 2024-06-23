@@ -2,10 +2,10 @@ class Passenger {
     private String nameOfThePassenger;
     private String genderOfThePassenger;
     private int ageOfThePassenger;
-    private String berthPreference;
+    private BerthPreference berthPreference;
     private ClassType classType;
 
-    public Passenger(String nameOfThePassenger, String genderOfThePassenger, int ageOfThePassenger, String berthPreference, ClassType classType) {
+    public Passenger(String nameOfThePassenger, String genderOfThePassenger, int ageOfThePassenger, BerthPreference berthPreference, ClassType classType) {
         this.nameOfThePassenger = nameOfThePassenger;
         this.genderOfThePassenger = genderOfThePassenger;
         this.ageOfThePassenger = ageOfThePassenger;
@@ -21,7 +21,7 @@ class Passenger {
         this.ageOfThePassenger = ageOfThePassenger;
     }
 
-    public void setBerthPreference(String berthPreference) {
+    public void setBerthPreference(BerthPreference berthPreference) {
         this.berthPreference = berthPreference;
     }
 
@@ -45,7 +45,7 @@ class Passenger {
         return genderOfThePassenger;
     }
 
-    public String getBerthPreference() {
+    public BerthPreference getBerthPreference() {
         return berthPreference;
     }
 
@@ -61,6 +61,5 @@ class Passenger {
                 ", ageOfThePassenger=" + ageOfThePassenger +
                 ", berthPreference='" + berthPreference + '\'' +
                 ", classType=" + classType ;
-                
     }
 }
