@@ -65,9 +65,9 @@ public class RailwayBooking {
         return false;
     }
 
-    public String getLastPassengerName() {
+    public List<Passenger> getLastPassengerName() {
         if (!db.getPassengers().isEmpty()) {
-            return db.getPassengers().get(db.getPassengers().size() - 1).getNameOfThePassenger();
+           return db.getPassengers();
         }
         return null;
     }

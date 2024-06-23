@@ -7,7 +7,7 @@ public class Test {
         Scanner input = new Scanner(System.in);
 
         while (true) {
-            System.out.println("1.Book 2.Cancel 3.View Last Booked Passenger 4.Exit");
+            System.out.println("1.Book 2.Cancel 3.View All Booked Passenger 4.Exit");
             String str = input.nextLine();
             switch (str) {
                 case "1":
