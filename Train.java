@@ -3,15 +3,17 @@ import java.util.EnumMap;
 public class Train {
 
     private String fromStation;
-    private String interMediateStation;
+    private String interMediateStation1;
+    private String interMediateStation2;
     private String toStation;
     private int totalSeats;
     private String trainName;
     private EnumMap<ClassType, EnumMap<BerthPreference, Integer>> seatCounts;
 
-    public Train(String fromStation, String interMediateStation, String toStation, int totalSeats, String trainName) {
+    public Train(String fromStation, String interMediateStation1,String interMediateStation2, String toStation, int totalSeats, String trainName) {
         this.fromStation = fromStation;
-        this.interMediateStation = interMediateStation;
+        this.interMediateStation1 = interMediateStation1;
+        this.interMediateStation2 = interMediateStation2;
         this.toStation = toStation;
         this.totalSeats = totalSeats;
         this.trainName = trainName;
@@ -30,8 +32,12 @@ public class Train {
         return fromStation;
     }
 
-    public String getInterMediateStation() {
-        return interMediateStation;
+    public String getInterMediateStation1() {
+        return interMediateStation1;
+    }
+
+    public String getInterMediateStation2() {
+        return interMediateStation2;
     }
 
     public String getToStation() {
@@ -54,9 +60,14 @@ public class Train {
         seatCounts.get(classType).put(berthPreference, count);
     }
     
-    public void setInterMediateStation(String interMediateStation) {
-        this.interMediateStation = interMediateStation;
+    public void setInterMediateStation1(String interMediateStation1) {
+        this.interMediateStation1 = interMediateStation1;
     }
+
+    public void setInterMediateStation2(String interMediateStation2) {
+        this.interMediateStation2 = interMediateStation2;
+    }
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

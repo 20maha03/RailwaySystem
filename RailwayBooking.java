@@ -51,7 +51,7 @@ public class RailwayBooking {
     public List<Train> checkTrains(String from, String to) {
         List<Train> tempTrain = new ArrayList<>();
         for (Train t : db.getTrains()) {
-            if (t.getFromStation().equals(from) && t.getToStation().equals(to) || t.getFromStation().equals(from) && t.getInterMediateStation().equals(to) || t.getInterMediateStation().equals(from) && t.getToStation().equals(to))  {
+            if (t.getFromStation().equals(from) && t.getToStation().equals(to) || t.getFromStation().equals(from) && t.getInterMediateStation1().equals(to) || t.getInterMediateStation1().equals(from) && t.getToStation().equals(to) || t.getFromStation().equals(from) && t.getInterMediateStation2().equals(to) || t.getInterMediateStation2().equals(from) && t.getToStation().equals(to))  {
                 tempTrain.add(t);
             }
         }
