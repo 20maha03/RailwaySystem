@@ -31,10 +31,53 @@ public class Test {
                         System.out.println("Enter gender:");
                         String gender = input.nextLine();
                         System.out.println("Enter berth preference: 1.UB, 2.MB, 3.LB, 4.SU, 5.SL");
-        
-                        BerthPreference berthPreference = BerthPreference.valueOf(input.nextLine());
-                        System.out.println("Enter class type: SL, A3, A2, A1");
-                        ClassType classType = ClassType.valueOf(input.nextLine());
+
+                        int bpChoice = input.nextInt();
+                        input.nextLine(); 
+                        BerthPreference berthPreference = null;
+                        switch (bpChoice) {
+                            case 1:
+                                berthPreference = BerthPreference.UB;
+                                break;
+                            case 2:
+                                berthPreference = BerthPreference.MB;
+                                break;
+                            case 3:
+                                berthPreference = BerthPreference.LB;
+                                break;
+                            case 4:
+                                berthPreference = BerthPreference.SU;
+                                break;
+                            case 5:
+                                berthPreference = BerthPreference.SL;
+                                break;
+                            default:
+                                System.out.println("Invalid berth preference.");
+                                continue;
+                        }
+
+                        System.out.println("Enter class type: 1.SL, 2.A3, 3.A2, 4.A1");
+                        int ctChoice = input.nextInt();
+                        input.nextLine();
+                        ClassType classType = null;
+                        switch (ctChoice) {
+                            case 1:
+                                classType = ClassType.SL;
+                                break;
+                            case 2:
+                                classType = ClassType.A3;
+                                break;
+                            case 3:
+                                classType = ClassType.A2;
+                                break;
+                            case 4:
+                                classType = ClassType.A1;
+                                break;
+                            default:
+                                System.out.println("Invalid class type.");
+                                continue;
+                        }
+
                         if (p.bookTheTicket(name, gender, age, berthPreference, classType, from, to, trainName)) {
                             System.out.println("Ticket booked successfully.");
                         } else {
@@ -54,7 +97,12 @@ public class Test {
                     }
                     break;
                 case "3":
-                    System.out.println("passengers List name: " + p.getAllPassenger());
+                    List<Passenger> passengers = p.getAllPassenger();
+                    if (passengers != null) {
+                        System.out.println("Passengers List: " + passengers);
+                    } else {
+                        System.out.println("No passengers found.");
+                    }
                     break;
                 case "4":
                     System.out.println("Exiting...");

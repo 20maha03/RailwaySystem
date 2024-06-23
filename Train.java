@@ -1,20 +1,13 @@
 import java.util.*;
 
 public class Train {
-
-    private String fromStation;
-    private String interMediateStation1;
-    private String interMediateStation2;
-    private String toStation;
+    private HashMap<String, Integer> interMediateStation;
     private int totalSeats;
     private String trainName;
-    private HashMap<ClassType,HashMap<BerthPreference,Integer>> seatCounts;
+    private HashMap<ClassType, HashMap<BerthPreference, Integer>> seatCounts;
 
-    public Train(String fromStation, String interMediateStation1,String interMediateStation2, String toStation, int totalSeats, String trainName) {
-        this.fromStation = fromStation;
-        this.interMediateStation1 = interMediateStation1;
-        this.interMediateStation2 = interMediateStation2;
-        this.toStation = toStation;
+    public Train(HashMap<String, Integer> interMediateStation, int totalSeats, String trainName) {
+        this.interMediateStation = interMediateStation;
         this.totalSeats = totalSeats;
         this.trainName = trainName;
         this.seatCounts = new HashMap<>();
@@ -22,26 +15,14 @@ public class Train {
         for (ClassType classType : ClassType.values()) {
             HashMap<BerthPreference, Integer> berthMap = new HashMap<>();
             for (BerthPreference bp : BerthPreference.values()) {
-                berthMap.put(bp, 2); 
+                berthMap.put(bp, 2);
             }
             seatCounts.put(classType, berthMap);
         }
     }
 
-    public String getFromStation() {
-        return fromStation;
-    }
-
-    public String getInterMediateStation1() {
-        return interMediateStation1;
-    }
-
-    public String getInterMediateStation2() {
-        return interMediateStation2;
-    }
-
-    public String getToStation() {
-        return toStation;
+    public HashMap<String, Integer> getInterMediateStation() {
+        return interMediateStation;
     }
 
     public int getTotalSeats() {
@@ -59,23 +40,14 @@ public class Train {
     public void setSeatCount(ClassType classType, BerthPreference berthPreference, int count) {
         seatCounts.get(classType).put(berthPreference, count);
     }
-    
-    public void setInterMediateStation1(String interMediateStation1) {
-        this.interMediateStation1 = interMediateStation1;
-    }
 
-    public void setInterMediateStation2(String interMediateStation2) {
-        this.interMediateStation2 = interMediateStation2;
-    }
-    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("fromStation = ").append(fromStation)
-                .append(" toStation = ").append(toStation)
-                .append(" totalSeats = ").append(totalSeats)
-                .append(" trainName = ").append(trainName)
-                .append(" Available seat counts:");
+        sb.append("interMediate station = ").append(interMediateStation)
+            .append(", totalSeats = ").append(totalSeats)
+            .append(", trainName = ").append(trainName)
+            .append(", Available seat counts:");
         for (ClassType ct : ClassType.values()) {
             sb.append(" ").append(ct).append(" {");
             for (BerthPreference bp : BerthPreference.values()) {

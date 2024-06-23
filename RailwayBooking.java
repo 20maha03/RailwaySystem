@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class RailwayBooking {
-
     private DataBase db = new DataBase();
     public List<Passenger> tempPassengers = new ArrayList<>();
     public HashMap<String, Integer> bookedTickets = new HashMap<>();
@@ -51,7 +50,8 @@ public class RailwayBooking {
     public List<Train> checkTrains(String from, String to) {
         List<Train> tempTrain = new ArrayList<>();
         for (Train t : db.getTrains()) {
-            if (t.getFromStation().equals(from) && t.getToStation().equals(to) || t.getFromStation().equals(from) && t.getInterMediateStation1().equals(to) || t.getInterMediateStation1().equals(from) && t.getToStation().equals(to) || t.getFromStation().equals(from) && t.getInterMediateStation2().equals(to) || t.getInterMediateStation2().equals(from) && t.getToStation().equals(to))  {
+            if (t.getInterMediateStation().containsKey(from) && t.getInterMediateStation().containsKey(to)
+                && t.getInterMediateStation().get(from) < t.getInterMediateStation().get(to)) {
                 tempTrain.add(t);
             }
         }
