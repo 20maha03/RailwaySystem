@@ -54,7 +54,7 @@ public class Test {
                     }
                     break;
                 case "3":
-                    System.out.println("Last booked passenger's name: " + p.getLastPassengerName());
+                    System.out.println("passengers List name: " + p.getAllPassenger());
                     break;
                 case "4":
                     System.out.println("Exiting...");

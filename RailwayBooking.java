@@ -51,7 +51,7 @@ public class RailwayBooking {
     public List<Train> checkTrains(String from, String to) {
         List<Train> tempTrain = new ArrayList<>();
         for (Train t : db.getTrains()) {
-            if (t.getFromStation().equals(from) && t.getToStation().equals(to)) {
+            if (t.getFromStation().equals(from) && t.getToStation().equals(to) || t.getFromStation().equals(from) && t.getInterMediateStation().equals(to) || t.getInterMediateStation().equals(from) && t.getToStation().equals(to))  {
                 tempTrain.add(t);
             }
         }
@@ -77,9 +77,9 @@ public class RailwayBooking {
         return false;
     }
 
-    public String getLastPassengerName() {
+    public List<Passenger> getAllPassenger() {
         if (!db.getPassengers().isEmpty()) {
-            return db.getPassengers().get(db.getPassengers().size() - 1).getNameOfThePassenger();
+            return db.getPassengers();
         }
         return null;
     }

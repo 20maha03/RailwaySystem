@@ -3,13 +3,15 @@ import java.util.EnumMap;
 public class Train {
 
     private String fromStation;
+    private String interMediateStation;
     private String toStation;
     private int totalSeats;
     private String trainName;
     private EnumMap<ClassType, EnumMap<BerthPreference, Integer>> seatCounts;
 
-    public Train(String fromStation, String toStation, int totalSeats, String trainName) {
+    public Train(String fromStation, String interMediateStation, String toStation, int totalSeats, String trainName) {
         this.fromStation = fromStation;
+        this.interMediateStation = interMediateStation;
         this.toStation = toStation;
         this.totalSeats = totalSeats;
         this.trainName = trainName;
@@ -26,6 +28,10 @@ public class Train {
 
     public String getFromStation() {
         return fromStation;
+    }
+
+    public String getInterMediateStation() {
+        return interMediateStation;
     }
 
     public String getToStation() {
@@ -47,7 +53,10 @@ public class Train {
     public void setSeatCount(ClassType classType, BerthPreference berthPreference, int count) {
         seatCounts.get(classType).put(berthPreference, count);
     }
-
+    
+    public void setInterMediateStation(String interMediateStation) {
+        this.interMediateStation = interMediateStation;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
