@@ -1,4 +1,4 @@
-import java.util.EnumMap;
+import java.util.*;
 
 public class Train {
 
@@ -8,7 +8,7 @@ public class Train {
     private String toStation;
     private int totalSeats;
     private String trainName;
-    private EnumMap<ClassType, EnumMap<BerthPreference, Integer>> seatCounts;
+    private HashMap<ClassType,HashMap<BerthPreference,Integer>> seatCounts;
 
     public Train(String fromStation, String interMediateStation1,String interMediateStation2, String toStation, int totalSeats, String trainName) {
         this.fromStation = fromStation;
@@ -17,10 +17,10 @@ public class Train {
         this.toStation = toStation;
         this.totalSeats = totalSeats;
         this.trainName = trainName;
-        this.seatCounts = new EnumMap<>(ClassType.class);
+        this.seatCounts = new HashMap<>();
 
         for (ClassType classType : ClassType.values()) {
-            EnumMap<BerthPreference, Integer> berthMap = new EnumMap<>(BerthPreference.class);
+            HashMap<BerthPreference, Integer> berthMap = new HashMap<>();
             for (BerthPreference bp : BerthPreference.values()) {
                 berthMap.put(bp, 2); 
             }
