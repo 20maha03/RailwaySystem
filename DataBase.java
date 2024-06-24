@@ -3,7 +3,7 @@ import java.util.*;
 public class DataBase {
     public List<Passenger> passengers;
     public List<Train> trains;
-
+    public List<User> users;
     public static HashMap<String, Integer> t1 = new HashMap<>();
     public static HashMap<String, Integer> t2 = new HashMap<>();
     public static HashMap<String, Integer> t3 = new HashMap<>();
@@ -48,6 +48,8 @@ public class DataBase {
     public DataBase() {
         passengers = new ArrayList<>();
         trains = new ArrayList<>();
+        users = new ArrayList<>(); // Initialize the users list
+
         passengers.add(new Passenger("Virat Kohli", "male", 32, BerthPreference.UB, ClassType.A1));
         passengers.add(new Passenger("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
         passengers.add(new Passenger("Bumrah", "male", 34, BerthPreference.SU, ClassType.A3));
@@ -58,6 +60,10 @@ public class DataBase {
         trains.add(new Train(t4, 8, "Tirunelveli Express"));
         trains.add(new Train(t5, 8, "Vellore Express"));
         trains.add(new Train(t6, 8, "Malli Express"));
+
+        users.add(new User("Maha", "Maha@123"));
+        users.add(new User("Bhu", "Bhu@123"));
+        users.add(new User("Go", "Go@123"));
     }
 
     public List<Passenger> getPassengers() {
@@ -66,5 +72,9 @@ public class DataBase {
 
     public List<Train> getTrains() {
         return trains;
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 }
