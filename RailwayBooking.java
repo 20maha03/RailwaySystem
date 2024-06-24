@@ -20,7 +20,6 @@ public class RailwayBooking {
                     System.out.println("Ticket id: " + ticketKey);
                     bookedTickets.put(ticketKey, count++);
 
-                    // Add ticket to user
                     for (User user : db.getUsers()) {
                         if (user.getUserName().equals(username)) {
                             user.addTicket(ticketKey);

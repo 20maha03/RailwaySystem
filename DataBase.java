@@ -48,7 +48,7 @@ public class DataBase {
     public DataBase() {
         passengers = new ArrayList<>();
         trains = new ArrayList<>();
-        users = new ArrayList<>(); // Initialize the users list
+        users = new ArrayList<>();
 
         passengers.add(new Passenger("Virat Kohli", "male", 32, BerthPreference.UB, ClassType.A1));
         passengers.add(new Passenger("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
