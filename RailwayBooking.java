@@ -43,11 +43,11 @@ public class RailwayBooking {
         return new ArrayList<>();
     }
 
-    private boolean isSeatAvailable(Train train, ClassType classType, BerthPreference berthPreference) {
+    public boolean isSeatAvailable(Train train, ClassType classType, BerthPreference berthPreference) {
         return train.getSeatCount(classType, berthPreference) > 0;
     }
 
-    private void bookSeat(Train train, ClassType classType, BerthPreference berthPreference) {
+    public void bookSeat(Train train, ClassType classType, BerthPreference berthPreference) {
         train.setSeatCount(classType, berthPreference, train.getSeatCount(classType, berthPreference) - 1);
     }
 
@@ -96,8 +96,33 @@ public class RailwayBooking {
         }
         return false;
     }
+    
+    public boolean isAdmin(String username, String password) {
+        for (Admin a : db.getAdmins()) {
+            if (a.getAdminName().equals(username) && a.getAdminPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    private String generateTicketKey(String destination, ClassType classType, int seatNumber, BerthPreference berthPreference) {
+    public void toAddNewTrain(HashMap<String, Integer> interMediateStation, String nameOfTheTrain, int availableSeats, String dateOfTrain) {
+        Train newTrain = new Train(interMediateStation,availableSeats,nameOfTheTrain,dateOfTrain);
+        db.trains.add(newTrain);
+    }
+
+    public void toDeleteTrain(String nameOfTheTrain) {
+        for (Train t : db.getTrains()) {
+            if (t.getTrainName().equals(nameOfTheTrain)) {
+                db.trains.remove(t);
+            }
+        }
+    }
+
+   
+    public String generateTicketKey(String destination, ClassType classType, int seatNumber, BerthPreference berthPreference) {
         return destination + "/" + classType + "/" + seatNumber + "/" + berthPreference;
     }
+
+
 }

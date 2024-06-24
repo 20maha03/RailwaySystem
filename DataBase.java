@@ -4,6 +4,7 @@ public class DataBase {
     public List<Passenger> passengers;
     public List<Train> trains;
     public List<User> users;
+    public List<Admin> admins;
     public static HashMap<String, Integer> t1 = new HashMap<>();
     public static HashMap<String, Integer> t2 = new HashMap<>();
     public static HashMap<String, Integer> t3 = new HashMap<>();
@@ -49,6 +50,7 @@ public class DataBase {
         passengers = new ArrayList<>();
         trains = new ArrayList<>();
         users = new ArrayList<>();
+        admins = new ArrayList<>();
 
         passengers.add(new Passenger("Virat Kohli", "male", 32, BerthPreference.UB, ClassType.A1));
         passengers.add(new Passenger("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
@@ -64,6 +66,10 @@ public class DataBase {
         users.add(new User("Maha", "Maha@123"));
         users.add(new User("Bhu", "Bhu@123"));
         users.add(new User("Go", "Go@123"));
+
+        admins.add(new Admin("Mahalakshmi","Maha@123"));
+        admins.add(new Admin("Bhuvana","Bhu@123"));
+        admins.add(new Admin("Gomathi","go@123"));
     }
 
     public List<Passenger> getPassengers() {
@@ -76,5 +82,9 @@ public class DataBase {
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public List<Admin> getAdmins() {
+        return admins;
     }
 }
