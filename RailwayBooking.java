@@ -3,6 +3,7 @@ import java.util.*;
 public class RailwayBooking {
     private DataBase db = new DataBase();
     public List<Passenger> tempPassengers = new ArrayList<>();
+    public List<Passenger> waitingListPassengers = new ArrayList<>();
     public HashMap<String, Integer> bookedTickets = new HashMap<>();
     public List<User> tempUsers = new ArrayList<>();
     int seatNumber = 1;
@@ -10,28 +11,32 @@ public class RailwayBooking {
 
     public boolean bookTheTicket(String username, String name, String gender, int age, BerthPreference berthPreference, ClassType classType, String from, String to, String trainName) {
         List<Train> availableTrains = checkTrains(from, to);
+        boolean isFound = false;
         for (Train t : availableTrains) {
-            if (trainName.equals(t.getTrainName())) {
-                if (isSeatAvailable(t, classType, berthPreference)) {
-                    bookSeat(t, classType, berthPreference);
-                    Passenger newPassenger = new Passenger(name, gender, age, berthPreference, classType);
-                    db.passengers.add(newPassenger);
-                    String ticketKey = generateTicketKey(to, classType, seatNumber++, berthPreference);
-                    System.out.println("Ticket id: " + ticketKey);
-                    bookedTickets.put(ticketKey, count++);
+            if (trainName.equals(t.getTrainName()) && isSeatAvailable(t, classType, berthPreference)) {
+            
+                bookSeat(t, classType, berthPreference);
+                Passenger newPassenger = new Passenger(name, gender, age, berthPreference, classType);
+                db.passengers.add(newPassenger);
+                String ticketKey = generateTicketKey(to, classType, seatNumber++, berthPreference);
+                System.out.println("Ticket id: " + ticketKey);
+                bookedTickets.put(ticketKey, count++);
 
-                    for (User user : db.getUsers()) {
-                        if (user.getUserName().equals(username)) {
-                            user.addTicket(ticketKey);
-                        }
+                for (User user : db.getUsers()) {
+                    if (user.getUserName().equals(username)) {
+                        user.addTicket(ticketKey);
                     }
-
-                    return true;
-                } 
+                }
+                isFound = true;
             }
         }
-        tempPassengers.add(new Passenger(name, gender, age, berthPreference, classType));
-        return false;
+        if(isFound) {
+            tempPassengers.add(new Passenger(name, gender, age, berthPreference, classType));
+        }
+        else {
+            waitingListPassengers.add(new Passenger(name, gender, age, berthPreference, classType));
+        }
+        return isFound;
     }
 
     public List<String> getUserTickets(String username) {

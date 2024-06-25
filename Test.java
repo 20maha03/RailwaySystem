@@ -179,12 +179,21 @@ public class Test {
 
     private static void viewAllPassengers(RailwayBooking p) {
        List<Passenger> passengers = p.getAllPassenger();
+       List<Passenger> waitListPassengers = p.waitingListPassengers;
         if (!passengers.isEmpty() && passengers != null ) {
            System.out.println("All Passengers");
            for (int i = 0; i < passengers.size(); i++) {
                System.out.print(passengers.get(i));
            }
+           if (!waitListPassengers.isEmpty()) {
+                System.out.println("All waiting list  Passengers");
+                for (int i = 0; i < waitListPassengers.size(); i++) {
+                    System.out.print(waitListPassengers.get(i));
+                
+                }
+            }
         }
+       
         else {
             System.out.println("No passengers");
         } 
