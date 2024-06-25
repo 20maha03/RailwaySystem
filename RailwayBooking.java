@@ -128,6 +128,18 @@ public class RailwayBooking {
     public String generateTicketKey(String destination, ClassType classType, int seatNumber, BerthPreference berthPreference) {
         return destination + "/" + classType + "/" + seatNumber + "/" + berthPreference;
     }
+    
+    public void toAddNewUser(String username, String password) {
+        User newUser = new User(username, password);
+        db.users.add(newUser);
+    }
 
+    public void toDeleteUser(String username, String password) {
+        for (User u : db.getUsers()) {
+            if (u.getUserName().equals(username) && u.getPassword().equals(password)) {
+                db.users.remove(u);
+            } 
+        }
+    }
 
 }

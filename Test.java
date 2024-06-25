@@ -12,7 +12,7 @@ public class Test {
             String password = input.nextLine();
 
             if (p.isAdmin(username, password)) {
-                System.out.println("1. Add Train\n2. Delete Train");
+                System.out.println("1. Add Train\n2. Delete Train\n3. Add user\n4. Delete user");
                 String str = input.nextLine();
                 switch (str) {
                     case "1":
@@ -20,6 +20,12 @@ public class Test {
                         break;
                     case "2":
                         deleteTrain(input, p);
+                        break;
+                    case "3":
+                        addUser(input,p);
+                        break;
+                    case "4":
+                        deleteUser(input,p);
                         break;
                     default:
                         System.out.println("Invalid option. Please try again.");
@@ -211,5 +217,23 @@ public class Test {
         else {
             System.out.println("Invalid username or password.");
         }
+    }
+    
+    public static void addUser(Scanner input, RailwayBooking p) {
+        System.out.println("Enter user name:");
+        String username = input.nextLine();
+        System.out.println("Enter password");
+        String password = input.nextLine();
+        p.toAddNewUser(username,password);
+        System.out.println("succussfully added");
+    }
+
+    public static void deleteUser(Scanner input, RailwayBooking p) {
+        System.out.println("Enter user name:");
+        String username = input.nextLine();
+        System.out.println("Enter password");
+        String password = input.nextLine();
+        p.toDeleteUser(username,password);
+        System.out.println("succussfully deleted");
     }
 }
