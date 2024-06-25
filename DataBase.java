@@ -56,12 +56,12 @@ public class DataBase {
         passengers.add(new Passenger("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
         passengers.add(new Passenger("Bumrah", "male", 34, BerthPreference.SU, ClassType.A3));
 
-        trains.add(new Train(t1, 8, "Chennai Express","03/07/2024"));
-        trains.add(new Train(t2, 8, "Coimbatore Express","05/07/2024"));
-        trains.add(new Train(t3, 8, "Salem Express","06/07/2024"));
-        trains.add(new Train(t4, 8, "Tirunelveli Express","01/02/2024"));
-        trains.add(new Train(t5, 8, "Vellore Express","07/07/2024"));
-        trains.add(new Train(t6, 8, "Malli Express","10/07/2024"));
+        trains.add(new Train( "Chennai Express",t1, 8,"03/07/2024"));
+        trains.add(new Train("Coimbatore Express",t2, 8, "05/07/2024"));
+        trains.add(new Train("Salem Express",t3, 8, "06/07/2024"));
+        trains.add(new Train("Tirunelveli Express",t4, 8, "01/02/2024"));
+        trains.add(new Train("Vellore Express",t5, 8, "07/07/2024"));
+        trains.add(new Train( "Malli Express",t6, 8,"10/07/2024"));
 
         users.add(new User("Maha", "Maha@123"));
         users.add(new User("Bhu", "Bhu@123"));

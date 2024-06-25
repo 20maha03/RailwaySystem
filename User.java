@@ -28,6 +28,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "Username: " + username + ", Password: " + password + ", Tickets: " + tickets;
+        return "Username: " + username + ",\r\n Password: " + password + ",\r\n Tickets: " + tickets;
     }
 }

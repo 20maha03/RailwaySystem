@@ -1,3 +1,4 @@
+import java.util.*;
 public class Passenger {
     private String name;
     private String gender;
@@ -19,11 +20,19 @@ public class Passenger {
 
     @Override
     public String toString() {
-        return "Passenger" +
-                "name='" + name +
-                ", gender='" + gender + 
-                ", age=" + age +
-                ", berthPreference=" + berthPreference +
-                ", classType=" + classType;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Passenger")
+                .append("\r\n")
+                .append("name = ").append(name)
+                .append(",\r\n")
+                .append("gender = ").append(gender)
+                .append(",\r\n")
+                .append("age = ").append(age)
+                .append(",\r\n")
+                .append("berth Perference = ").append(berthPreference)
+                .append(",\r\n")
+                .append("class Type = ").append(classType).append(",\r\n")
+                .append("\r\n");
+            return sb.toString();
     }
 }

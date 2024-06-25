@@ -106,8 +106,8 @@ public class RailwayBooking {
         return false;
     }
 
-    public void toAddNewTrain(HashMap<String, Integer> interMediateStation, String nameOfTheTrain, int availableSeats, String dateOfTrain) {
-        Train newTrain = new Train(interMediateStation,availableSeats,nameOfTheTrain,dateOfTrain);
+    public void toAddNewTrain( String nameOfTheTrain, HashMap<String, Integer> interMediateStation,int availableSeats, String dateOfTrain) {
+        Train newTrain = new Train(nameOfTheTrain,interMediateStation,availableSeats,dateOfTrain);
         db.trains.add(newTrain);
     }
 

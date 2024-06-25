@@ -73,7 +73,7 @@ public class Test {
         input.nextLine(); 
         System.out.println("Enter date (YYYY-MM-DD):");
         String dateOfTrain = input.nextLine();
-        p.toAddNewTrain(trainInterMediateStation,nameOfTheTrain, availableSeats, dateOfTrain);
+        p.toAddNewTrain(nameOfTheTrain,trainInterMediateStation, availableSeats, dateOfTrain);
     }
 
     private static void deleteTrain(Scanner input, RailwayBooking p) {
@@ -178,13 +178,16 @@ public class Test {
     }
 
     private static void viewAllPassengers(RailwayBooking p) {
-        List<Passenger> passengers = p.getAllPassenger();
-        if (passengers != null && !passengers.isEmpty()) {
-            System.out.println("Passengers List: " + passengers);
-        } 
-        else {
-            System.out.println("No passengers found.");
+       List<Passenger> passengers = p.getAllPassenger();
+        if (!passengers.isEmpty() && passengers != null ) {
+           System.out.println("All Passengers");
+           for (int i = 0; i < passengers.size(); i++) {
+               System.out.print(passengers.get(i));
+           }
         }
+        else {
+            System.out.println("No passengers");
+        } 
     }
 
     private static void viewMyTickets(Scanner input, RailwayBooking p) {
