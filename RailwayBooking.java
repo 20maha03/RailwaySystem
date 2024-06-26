@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class RailwayBooking {
+    
     private DataBase db = new DataBase();
     public List<Passenger> tempPassengers = new ArrayList<>();
     public List<Passenger> waitingListPassengers = new ArrayList<>();
@@ -8,6 +9,7 @@ public class RailwayBooking {
     public List<User> tempUsers = new ArrayList<>();
     int seatNumber = 1;
     int count = 1;
+    private User.RoleOfTheUser role;
 
     public boolean bookTheTicket(String username, String name, String gender, int age, BerthPreference berthPreference, ClassType classType, String from, String to, String trainName) {
         List<Train> availableTrains = checkTrains(from, to);
@@ -103,8 +105,9 @@ public class RailwayBooking {
     }
     
     public boolean isAdmin(String username, String password) {
-        for (Admin a : db.getAdmins()) {
-            if (a.getAdminName().equals(username) && a.getAdminPassword().equals(password)) {
+        for (User a : db.getUsers()) {
+            role = a.getRole();
+            if (a.getUserName().equals(username) && a.getPassword().equals(password) && role.equals("Admin")) {
                 return true;
             }
         }
@@ -129,8 +132,8 @@ public class RailwayBooking {
         return destination + "/" + classType + "/" + seatNumber + "/" + berthPreference;
     }
     
-    public void toAddNewUser(String username, String password) {
-        User newUser = new User(username, password);
+    public void toAddNewUser(String username, String password,User.RoleOfTheUser roleOfTheUser) {
+        User newUser = new User(username, password,roleOfTheUser);
         db.users.add(newUser);
     }
 

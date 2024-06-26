@@ -1,7 +1,9 @@
 import java.util.*;
 
 public class Test {
+    
     public static void main(String[] args) {
+        User u = new User();
         RailwayBooking p = new RailwayBooking();
         Scanner input = new Scanner(System.in);
 
@@ -10,7 +12,6 @@ public class Test {
             String username = input.nextLine();
             System.out.println("Enter password:");
             String password = input.nextLine();
-
             if (p.isAdmin(username, password)) {
                 System.out.println("1. Add Train\n2. Delete Train\n3. Add user\n4. Delete user");
                 String str = input.nextLine();
@@ -224,7 +225,11 @@ public class Test {
         String username = input.nextLine();
         System.out.println("Enter password");
         String password = input.nextLine();
-        p.toAddNewUser(username,password);
+        System.out.println("1.Admin/n2.User");
+        int roleChoice = input.nextInt();
+        input.nextLine(); 
+        User.RoleOfTheUser roleOfTheUser = User.getRoleOfTheUser(roleChoice);
+        p.toAddNewUser(username,password,roleOfTheUser);
         System.out.println("succussfully added");
     }
 

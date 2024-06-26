@@ -18,6 +18,15 @@ public class Passenger {
         return name;
     }
 
+    public int getAgeOfThePassenger() {
+        return age;
+    }
+
+    public String getGenderOfThePassenger() {
+        return gender;
+    }
+    
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
