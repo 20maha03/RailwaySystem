@@ -80,13 +80,13 @@ public class Test {
         input.nextLine(); 
         System.out.println("Enter date (YYYY-MM-DD):");
         String dateOfTrain = input.nextLine();
-        p.toAddNewTrain(nameOfTheTrain,trainInterMediateStation, availableSeats, dateOfTrain);
+        p.addNewTrain(nameOfTheTrain,trainInterMediateStation, availableSeats, dateOfTrain);
     }
 
     private static void deleteTrain(Scanner input, RailwayBooking p) {
         System.out.println("Enter name of the train:");
         String nameOfTheTrain = input.nextLine();
-        p.toDeleteTrain(nameOfTheTrain);
+        p.deleteTrain(nameOfTheTrain);
     }
 
     private static void bookTicket(String username, String password, Scanner input, RailwayBooking p) {

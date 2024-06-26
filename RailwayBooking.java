@@ -114,12 +114,12 @@ public class RailwayBooking {
         return false;
     }
 
-    public void toAddNewTrain( String nameOfTheTrain, HashMap<String, Integer> interMediateStation,int availableSeats, String dateOfTrain) {
+    public void addNewTrain( String nameOfTheTrain, HashMap<String, Integer> interMediateStation,int availableSeats, String dateOfTrain) {
         Train newTrain = new Train(nameOfTheTrain,interMediateStation,availableSeats,dateOfTrain);
         db.trains.add(newTrain);
     }
 
-    public void toDeleteTrain(String nameOfTheTrain) {
+    public void deleteTrain(String nameOfTheTrain) {
         for (Train t : db.getTrains()) {
             if (t.getTrainName().equals(nameOfTheTrain)) {
                 db.trains.remove(t);
