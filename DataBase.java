@@ -48,22 +48,22 @@ public class DataBase {
     public DataBase() {
         passengers = new ArrayList<>();
         trains = new ArrayList<>();
-        users = new ArrayList<>(); // Initialize the users list
+        users = new ArrayList<>();
 
         passengers.add(new Passenger("Virat Kohli", "male", 32, BerthPreference.UB, ClassType.A1));
         passengers.add(new Passenger("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
         passengers.add(new Passenger("Bumrah", "male", 34, BerthPreference.SU, ClassType.A3));
 
-        trains.add(new Train(t1, 8, "Chennai Express"));
-        trains.add(new Train(t2, 8, "Coimbatore Express"));
-        trains.add(new Train(t3, 8, "Salem Express"));
-        trains.add(new Train(t4, 8, "Tirunelveli Express"));
-        trains.add(new Train(t5, 8, "Vellore Express"));
-        trains.add(new Train(t6, 8, "Malli Express"));
+        trains.add(new Train("Chennai Express", t1, 8, "03/07/2024"));
+        trains.add(new Train("Coimbatore Express", t2, 8, "05/07/2024"));
+        trains.add(new Train("Salem Express", t3, 8, "06/07/2024"));
+        trains.add(new Train("Tirunelveli Express", t4, 8, "01/02/2024"));
+        trains.add(new Train("Vellore Express", t5, 8, "07/07/2024"));
+        trains.add(new Train("Malli Express", t6, 8, "10/07/2024"));
 
-        users.add(new User("Maha", "Maha@123"));
-        users.add(new User("Bhu", "Bhu@123"));
-        users.add(new User("Go", "Go@123"));
+        users.add(new User("Maha", "Maha@123", User.RoleOfTheUser.ADMIN));
+        users.add(new User("Bhu", "Bhu@123", User.RoleOfTheUser.USER));
+        users.add(new User("Go", "Go@123", User.RoleOfTheUser.ADMIN));
     }
 
     public List<Passenger> getPassengers() {

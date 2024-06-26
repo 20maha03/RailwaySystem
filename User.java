@@ -1,17 +1,29 @@
 import java.util.*;
+
 public class User {
-    private String username;
+    
+    public enum RoleOfTheUser {
+        ADMIN, USER
+    }
+
+    private String userName;
     private String password;
     private List<String> tickets;
+    private RoleOfTheUser role;
 
-    public User(String username, String password) {
-        this.username = username;
+    public User() {
+        this.tickets = new ArrayList<>();
+    }
+
+    public User(String userName, String password, RoleOfTheUser role) {
+        this.userName = userName;
         this.password = password;
+        this.role = role;
         this.tickets = new ArrayList<>();
     }
 
     public String getUserName() {
-        return username;
+        return userName;
     }
 
     public String getPassword() {
@@ -22,12 +34,20 @@ public class User {
         return tickets;
     }
 
+    public RoleOfTheUser getRole() {
+        return role;
+    }
     public void addTicket(String ticket) {
         tickets.add(ticket);
     }
 
-    @Override
-    public String toString() {
-        return "Username: " + username + ", Password: " + password + ", Tickets: " + tickets;
+
+    public static RoleOfTheUser getRoleOfTheUser(int roleChoice) {
+       if (roleChoice == 1) {
+          return RoleOfTheUser.ADMIN;
+        }
+        else 
+        return RoleOfTheUser.USER;
     }
 }
+    
