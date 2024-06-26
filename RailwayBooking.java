@@ -60,10 +60,14 @@ public class RailwayBooking {
 
     public List<Train> checkTrains(String from, String to) {
         List<Train> tempTrain = new ArrayList<>();
-        for (Train t : db.getTrains()) {
-            if (t.getInterMediateStation().containsKey(from) && t.getInterMediateStation().containsKey(to)
-                && t.getInterMediateStation().get(from) < t.getInterMediateStation().get(to)) {
-                tempTrain.add(t);
+        for (Route t : db.getRoutes()) {
+            if (t.getRoutesOfTheTrain().containsKey(from) && t.getRoutesOfTheTrain().containsKey(to)
+                && t.getRoutesOfTheTrain().get(from) < t.getRoutesOfTheTrain().get(to)) {
+                for (Train train : db.getTrains()) {
+                    if (train.getTrainId() == t.getRouteId()) {
+                        tempTrain.add(train);
+                    }
+                }
             }
         }
         return tempTrain;
@@ -115,25 +119,33 @@ public class RailwayBooking {
     }
 
     public void addNewTrain( String nameOfTheTrain, HashMap<String, Integer> interMediateStation,int availableSeats, String dateOfTrain) {
-        Train newTrain = new Train(nameOfTheTrain,interMediateStation,availableSeats,dateOfTrain);
+        Train newTrain = new Train(nameOfTheTrain, db.getTrains().size() + 1, availableSeats, dateOfTrain);
         db.trains.add(newTrain);
+        Route newRoute = new Route(db.getRoutes().size() + 1, interMediateStation);
+        db.routes.add(newRoute);
     }
 
     public void deleteTrain(String nameOfTheTrain) {
         for (Train t : db.getTrains()) {
             if (t.getTrainName().equals(nameOfTheTrain)) {
                 db.trains.remove(t);
+                for (Route r : db.getRoutes()) {
+                    if (r.getRouteId() == t.getTrainId()) {
+                        db.routes.remove(r);
+                        break;
+                    }
+                }
+                break;
             }
         }
     }
 
-   
     public String generateTicketKey(String destination, ClassType classType, int seatNumber, BerthPreference berthPreference) {
         return destination + "/" + classType + "/" + seatNumber + "/" + berthPreference;
     }
-    
-    public void toAddNewUser(String username, String password,User.RoleOfTheUser roleOfTheUser) {
-        User newUser = new User(username, password,roleOfTheUser);
+
+    public void toAddNewUser(String username, String password, User.RoleOfTheUser roleOfTheUser) {
+        User newUser = new User(username, password, roleOfTheUser);
         db.users.add(newUser);
     }
 
@@ -141,8 +153,8 @@ public class RailwayBooking {
         for (User u : db.getUsers()) {
             if (u.getUserName().equals(username) && u.getPassword().equals(password)) {
                 db.users.remove(u);
-            } 
+                break;
+            }
         }
     }
-
 }

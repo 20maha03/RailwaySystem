@@ -2,14 +2,14 @@ import java.util.*;
 
 public class Train {
     private String trainName;
-    private HashMap<String, Integer> interMediateStation;
+    private int trainId;
     private int totalSeats;
     private HashMap<ClassType, HashMap<BerthPreference, Integer>> seatCounts;
     private String dateOfTrain;
 
-    public Train(String trainName, HashMap<String, Integer> interMediateStation, int totalSeats,String dateOfTrain) {
+    public Train(String trainName, int trainId, int totalSeats,String dateOfTrain) {
         this.trainName = trainName;
-        this.interMediateStation = interMediateStation;
+        this.trainId = trainId;
         this.totalSeats = totalSeats;
         this.seatCounts = new HashMap<>();
         this.dateOfTrain = dateOfTrain;
@@ -23,8 +23,8 @@ public class Train {
         }
     }
 
-    public HashMap<String, Integer> getInterMediateStation() {
-        return interMediateStation;
+    public int getTrainId() {
+        return trainId;
     }
 
     public int getTotalSeats() {
@@ -56,7 +56,7 @@ public class Train {
         StringBuilder sb = new StringBuilder();
         sb.append("trainName = ").append(trainName)
             .append(",\r\n")
-            .append("interMediate station = ").append(interMediateStation)
+            .append(" train id = ").append(trainId)
             .append(",\r\n")
             .append("totalSeats = ").append(totalSeats)
             .append(",\r\n")

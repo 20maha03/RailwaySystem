@@ -1,5 +1,7 @@
 import java.util.*;
 
+import java.util.Scanner;
+
 public class Test {
     
     public static void main(String[] args) {
@@ -17,49 +19,49 @@ public class Test {
                 String str = input.nextLine();
                 switch (str) {
                     case "1":
-                        addTrain(input, p);
-                        break;
+                       addTrain(input, p);
+                       break;
                     case "2":
                         deleteTrain(input, p);
                         break;
                     case "3":
-                        addUser(input,p);
+                        addUser(input, p);
                         break;
                     case "4":
-                        deleteUser(input,p);
+                        deleteUser(input, p);
                         break;
                     default:
                         System.out.println("Invalid option. Please try again.");
                         break;
                 }
             }
-
-            System.out.println("1. Login and Book\n2. Cancel\n3. View All Booked Passengers\n4. View My Tickets\n5. Exit");
-            String str = input.nextLine();
-            switch (str) {
-                case "1":
-                    bookTicket(username, password, input, p);
-                    break;
-                case "2":
-                    cancelTicket(input, p);
-                    break;
-                case "3":
-                    viewAllPassengers(p);
-                    break;
-                case "4":
-                    viewMyTickets(input, p);
-                    break;
-                case "5":
-                    System.out.println("Exiting...");
-                    input.close();
-                    return;
-                default:
-                    System.out.println("Invalid option. Please try again.");
-                    break;
+            else {
+                System.out.println("1. Login and Book\n2. Cancel\n3. View All Booked Passengers\n4. View My Tickets\n5. Exit");
+                String str = input.nextLine();
+                switch (str) {
+                    case "1":
+                        bookTicket(username, password, input, p);
+                        break;
+                    case "2":
+                        cancelTicket(input, p);
+                        break;
+                    case "3":
+                        viewAllPassengers(p);
+                        break;
+                    case "4":
+                        viewMyTickets(input,p);
+                        break;
+                    case "5":
+                        System.out.println("Exiting...");
+                        input.close();
+                        return;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                        break;
+                }
             }
         }
     }
-
     private static void addTrain(Scanner input, RailwayBooking p) {
         System.out.println("Enter name of the train:");
         String nameOfTheTrain = input.nextLine();

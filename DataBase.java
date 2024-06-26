@@ -4,6 +4,7 @@ public class DataBase {
     public List<Passenger> passengers;
     public List<Train> trains;
     public List<User> users;
+    public List<Route> routes;
     public static HashMap<String, Integer> t1 = new HashMap<>();
     public static HashMap<String, Integer> t2 = new HashMap<>();
     public static HashMap<String, Integer> t3 = new HashMap<>();
@@ -49,21 +50,29 @@ public class DataBase {
         passengers = new ArrayList<>();
         trains = new ArrayList<>();
         users = new ArrayList<>();
+        routes = new ArrayList<>();
 
         passengers.add(new Passenger("Virat Kohli", "male", 32, BerthPreference.UB, ClassType.A1));
         passengers.add(new Passenger("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
         passengers.add(new Passenger("Bumrah", "male", 34, BerthPreference.SU, ClassType.A3));
 
-        trains.add(new Train("Chennai Express", t1, 8, "03/07/2024"));
-        trains.add(new Train("Coimbatore Express", t2, 8, "05/07/2024"));
-        trains.add(new Train("Salem Express", t3, 8, "06/07/2024"));
-        trains.add(new Train("Tirunelveli Express", t4, 8, "01/02/2024"));
-        trains.add(new Train("Vellore Express", t5, 8, "07/07/2024"));
-        trains.add(new Train("Malli Express", t6, 8, "10/07/2024"));
+        trains.add(new Train("Chennai Express", 1, 8, "03/07/2024"));
+        trains.add(new Train("Coimbatore Express", 2, 8, "05/07/2024"));
+        trains.add(new Train("Salem Express", 3, 8, "06/07/2024"));
+        trains.add(new Train("Tirunelveli Express", 4, 8, "01/02/2024"));
+        trains.add(new Train("Vellore Express", 5, 8, "07/07/2024"));
+        trains.add(new Train("Malli Express", 6, 8, "10/07/2024"));
 
         users.add(new User("Maha", "Maha@123", User.RoleOfTheUser.ADMIN));
         users.add(new User("Bhu", "Bhu@123", User.RoleOfTheUser.USER));
         users.add(new User("Go", "Go@123", User.RoleOfTheUser.ADMIN));
+
+        routes.add(new Route(1,t1));
+        routes.add(new Route(2,t2));
+        routes.add(new Route(3,t3));
+        routes.add(new Route(4,t4));
+        routes.add(new Route(5,t5));
+        routes.add(new Route(6,t6));
     }
 
     public List<Passenger> getPassengers() {
@@ -76,5 +85,8 @@ public class DataBase {
 
     public List<User> getUsers() {
         return users;
+    }
+    public List<Route> getRoutes() {
+        return routes;
     }
 }
