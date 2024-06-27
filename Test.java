@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Test {
     
     public static void main(String[] args) {
-        User u = new User();
+        //User u = new User();
         RailwayBooking p = new RailwayBooking();
         Scanner input = new Scanner(System.in);
 
@@ -46,7 +46,7 @@ public class Test {
                         cancelTicket(input, p);
                         break;
                     case "3":
-                        viewAllPassengers(p);
+                        viewAllTicket(p);
                         break;
                     case "4":
                         viewMyTickets(input,p);
@@ -186,18 +186,18 @@ public class Test {
         }
     }
 
-    private static void viewAllPassengers(RailwayBooking p) {
-       List<Passenger> passengers = p.getAllPassenger();
-       List<Passenger> waitListPassengers = p.waitingListPassengers;
-        if (!passengers.isEmpty() && passengers != null ) {
+    private static void viewAllTicket(RailwayBooking p) {
+       List<Ticket> tickets = p.getAllTickets();
+       List<Ticket> waitListTickets = p.waitingListTickets;
+        if (!tickets.isEmpty() && tickets != null ) {
            System.out.println("All Passengers");
-           for (int i = 0; i < passengers.size(); i++) {
-               System.out.print(passengers.get(i));
+           for (int i = 0; i < tickets.size(); i++) {
+               System.out.print(tickets.get(i));
            }
-           if (!waitListPassengers.isEmpty()) {
+           if (!waitListTickets.isEmpty()) {
                 System.out.println("All waiting list  Passengers");
-                for (int i = 0; i < waitListPassengers.size(); i++) {
-                    System.out.print(waitListPassengers.get(i));
+                for (int i = 0; i < waitListTickets.size(); i++) {
+                    System.out.print(waitListTickets.get(i));
                 
                 }
             }
@@ -230,8 +230,8 @@ public class Test {
         System.out.println("1.Admin/n2.User");
         int roleChoice = input.nextInt();
         input.nextLine(); 
-        User.RoleOfTheUser roleOfTheUser = User.getRoleOfTheUser(roleChoice);
-        p.toAddNewUser(username,password,roleOfTheUser);
+        User.Role role = User.getRole(roleChoice);
+        p.addNewUser(username,password,role);
         System.out.println("succussfully added");
     }
 
@@ -240,7 +240,7 @@ public class Test {
         String username = input.nextLine();
         System.out.println("Enter password");
         String password = input.nextLine();
-        p.toDeleteUser(username,password);
+        p.deleteUser(username,password);
         System.out.println("succussfully deleted");
     }
 }

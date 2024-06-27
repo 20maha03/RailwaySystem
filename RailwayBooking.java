@@ -3,13 +3,13 @@ import java.util.*;
 public class RailwayBooking {
     
     private DataBase db = new DataBase();
-    public List<Passenger> tempPassengers = new ArrayList<>();
-    public List<Passenger> waitingListPassengers = new ArrayList<>();
+    public List<Ticket> tempTickets = new ArrayList<>();
+    public List<Ticket> waitingListTickets = new ArrayList<>();
     public HashMap<String, Integer> bookedTickets = new HashMap<>();
     public List<User> tempUsers = new ArrayList<>();
     int seatNumber = 1;
     int count = 1;
-    private User.RoleOfTheUser role;
+    private User.Role role;
 
     public boolean bookTheTicket(String username, String name, String gender, int age, BerthPreference berthPreference, ClassType classType, String from, String to, String trainName) {
         List<Train> availableTrains = checkTrains(from, to);
@@ -18,8 +18,8 @@ public class RailwayBooking {
             if (trainName.equals(t.getTrainName()) && isSeatAvailable(t, classType, berthPreference)) {
             
                 bookSeat(t, classType, berthPreference);
-                Passenger newPassenger = new Passenger(name, gender, age, berthPreference, classType);
-                db.passengers.add(newPassenger);
+                Ticket newTicket = new Ticket(name, gender, age, berthPreference, classType);
+                db.tickets.add(newTicket);
                 String ticketKey = generateTicketKey(to, classType, seatNumber++, berthPreference);
                 System.out.println("Ticket id: " + ticketKey);
                 bookedTickets.put(ticketKey, count++);
@@ -33,10 +33,10 @@ public class RailwayBooking {
             }
         }
         if(isFound) {
-            tempPassengers.add(new Passenger(name, gender, age, berthPreference, classType));
+            tempTickets.add(new Ticket(name, gender, age, berthPreference, classType));
         }
         else {
-            waitingListPassengers.add(new Passenger(name, gender, age, berthPreference, classType));
+            waitingListTickets.add(new Ticket(name, gender, age, berthPreference, classType));
         }
         return isFound;
     }
@@ -74,9 +74,9 @@ public class RailwayBooking {
     }
 
     public boolean cancelTheTicket(String name) {
-        for (Passenger e : db.getPassengers()) {
+        for (Ticket e : db.getTickets()) {
             if (name.equals(e.getNameOfThePassenger())) {
-                db.passengers.remove(e);
+                db.tickets.remove(e);
                 return true;
             }
         }
@@ -84,17 +84,17 @@ public class RailwayBooking {
     }
 
     public boolean moveTicketStatus() {
-        if (!tempPassengers.isEmpty()) {
-            Passenger passenger = tempPassengers.remove(0);
-            db.passengers.add(passenger);
+        if (!tempTickets.isEmpty()) {
+            Ticket ticket = tempTickets.remove(0);
+            db.tickets.add(ticket);
             return true;
         }
         return false;
     }
 
-    public List<Passenger> getAllPassenger() {
-        if (!db.getPassengers().isEmpty()) {
-            return db.getPassengers();
+    public List<Ticket> getAllTickets() {
+        if (!db.getTickets().isEmpty()) {
+            return db.getTickets();
         }
         return null;
     }
@@ -144,12 +144,12 @@ public class RailwayBooking {
         return destination + "/" + classType + "/" + seatNumber + "/" + berthPreference;
     }
 
-    public void toAddNewUser(String username, String password, User.RoleOfTheUser roleOfTheUser) {
-        User newUser = new User(username, password, roleOfTheUser);
+    public void addNewUser(String username, String password, User.Role role) {
+        User newUser = new User(username, password, role);
         db.users.add(newUser);
     }
 
-    public void toDeleteUser(String username, String password) {
+    public void deleteUser(String username, String password) {
         for (User u : db.getUsers()) {
             if (u.getUserName().equals(username) && u.getPassword().equals(password)) {
                 db.users.remove(u);

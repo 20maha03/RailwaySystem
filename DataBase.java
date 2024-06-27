@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class DataBase {
-    public List<Passenger> passengers;
+    public List<Ticket> tickets;
     public List<Train> trains;
     public List<User> users;
     public List<Route> routes;
@@ -47,14 +47,14 @@ public class DataBase {
     }
 
     public DataBase() {
-        passengers = new ArrayList<>();
+        tickets = new ArrayList<>();
         trains = new ArrayList<>();
         users = new ArrayList<>();
         routes = new ArrayList<>();
 
-        passengers.add(new Passenger("Virat Kohli", "male", 32, BerthPreference.UB, ClassType.A1));
-        passengers.add(new Passenger("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
-        passengers.add(new Passenger("Bumrah", "male", 34, BerthPreference.SU, ClassType.A3));
+        tickets.add(new Ticket("Virat Kohli", "male", 32, BerthPreference.UB, ClassType.A1));
+        tickets.add(new Ticket("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
+        tickets.add(new Ticket("Bumrah", "male", 34, BerthPreference.SU, ClassType.A3));
 
         trains.add(new Train("Chennai Express", 1, 8, "03/07/2024"));
         trains.add(new Train("Coimbatore Express", 2, 8, "05/07/2024"));
@@ -63,9 +63,9 @@ public class DataBase {
         trains.add(new Train("Vellore Express", 5, 8, "07/07/2024"));
         trains.add(new Train("Malli Express", 6, 8, "10/07/2024"));
 
-        users.add(new User("Maha", "Maha@123", User.RoleOfTheUser.ADMIN));
-        users.add(new User("Bhu", "Bhu@123", User.RoleOfTheUser.USER));
-        users.add(new User("Go", "Go@123", User.RoleOfTheUser.ADMIN));
+        users.add(new User("Maha", "Maha@123", User.Role.ADMIN));
+        users.add(new User("Bhu", "Bhu@123", User.Role.USER));
+        users.add(new User("Go", "Go@123", User.Role.ADMIN));
 
         routes.add(new Route(1,t1));
         routes.add(new Route(2,t2));
@@ -75,8 +75,8 @@ public class DataBase {
         routes.add(new Route(6,t6));
     }
 
-    public List<Passenger> getPassengers() {
-        return passengers;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 
     public List<Train> getTrains() {

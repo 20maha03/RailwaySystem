@@ -1,12 +1,12 @@
 import java.util.*;
-public class Passenger {
+public class Ticket{
     private String name;
     private String gender;
     private int age;
     private BerthPreference berthPreference;
     private ClassType classType;
 
-    public Passenger(String name, String gender, int age, BerthPreference berthPreference, ClassType classType) {
+    public Ticket(String name, String gender, int age, BerthPreference berthPreference, ClassType classType) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -30,7 +30,7 @@ public class Passenger {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Passenger")
+        sb.append("Tickets")
                 .append("\r\n")
                 .append("name = ").append(name)
                 .append(",\r\n")
