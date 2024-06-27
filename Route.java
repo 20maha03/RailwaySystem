@@ -3,32 +3,36 @@ import java.util.Map;
 
 public class Route {
     private int routeId;
-    private Map<String,Integer> routesOfTheTrain;
+    private Map<String,Integer> stations;
 
-    public Route(int routeId, Map<String,Integer> routesOfTheTrain) {
+    public Route(int routeId, Map<String,Integer> stations) {
         this.routeId = routeId;
-        this.routesOfTheTrain = routesOfTheTrain;
+        this.stations = stations;
     } 
 
     public void setRouteId(int routeId) {
         this.routeId = routeId;
     }
 
-    public void setRoutesOfTheTrain(Map<String,Integer> routesOfTheTrain) {
-        this.routesOfTheTrain = routesOfTheTrain;
+    public void setStations(Map<String,Integer> stations) {
+        this.stations = stations;
     }
 
     public int getRouteId() {
         return routeId;
     }
 
-    public Map<String,Integer> getRoutesOfTheTrain() {
-        return routesOfTheTrain;
+    public void addStation() {
+
+    }
+
+    public Map<String,Integer> getStations() {
+        return stations;
     }
 
     @Override
     public String toString() {
         return "route Id = " +routeId +
-               " routes = " +routesOfTheTrain;
+               " routes = " +stations;
     }
 }
