@@ -70,6 +70,10 @@ public class Test {
         input.nextLine(); 
         String[] arr = new String[numberOfStations];
         HashMap<String, Integer> trainInterMediateStation = new HashMap<>();
+        System.out.println("Enter start station");
+        String startStation = input.nextLine();
+        System.out.println("enter end station");
+        String endStation = input.nextLine();
         System.out.println("Enter station names:");
         for (int i = 0; i < numberOfStations; i++) {
             arr[i] = input.nextLine();
@@ -82,7 +86,7 @@ public class Test {
         input.nextLine(); 
         System.out.println("Enter date (YYYY-MM-DD):");
         String dateOfTrain = input.nextLine();
-        p.addNewTrain(nameOfTheTrain,trainInterMediateStation, availableSeats, dateOfTrain);
+        p.addNewTrain(nameOfTheTrain,startStation, endStation,trainInterMediateStation, availableSeats, dateOfTrain);
     }
 
     private static void deleteTrain(Scanner input, RailwayBooking p) {

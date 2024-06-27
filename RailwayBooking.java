@@ -60,11 +60,11 @@ public class RailwayBooking {
 
     public List<Train> checkTrains(String from, String to) {
         List<Train> tempTrain = new ArrayList<>();
-        for (Route t : db.getRoutes()) {
-            if (t.getRoutesOfTheTrain().containsKey(from) && t.getRoutesOfTheTrain().containsKey(to)
-                && t.getRoutesOfTheTrain().get(from) < t.getRoutesOfTheTrain().get(to)) {
+        for (Route route : db.getRoutes()) {
+            if (route.getAllStation().containsKey(from) && route.getAllStation().containsKey(to)
+                && route.getAllStation().get(from) < route.getAllStation().get(to)) {
                 for (Train train : db.getTrains()) {
-                    if (train.getTrainId() == t.getRouteId()) {
+                    if (train.getTrainId() == route.getRouteId()) {
                         tempTrain.add(train);
                     }
                 }
@@ -118,10 +118,10 @@ public class RailwayBooking {
         return false;
     }
 
-    public void addNewTrain( String nameOfTheTrain, HashMap<String, Integer> interMediateStation,int availableSeats, String dateOfTrain) {
-        Train newTrain = new Train(nameOfTheTrain, db.getTrains().size() + 1, availableSeats, dateOfTrain);
+    public void addNewTrain( String nameOfTheTrain,String startStation, String endStation, HashMap<String, Integer> interMediateStation,int availableSeats, String dateOfTrain) {
+        Train newTrain = new Train(nameOfTheTrain,db.getTrains().size() + 1, startStation, endStation, availableSeats, dateOfTrain);
         db.trains.add(newTrain);
-        Route newRoute = new Route(db.getRoutes().size() + 1, interMediateStation);
+        Route newRoute = new Route(db.getRoutes().size() + 1, interMediateStation,startStation,endStation);
         db.routes.add(newRoute);
     }
 

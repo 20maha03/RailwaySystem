@@ -2,14 +2,18 @@ import java.util.*;
 
 public class Train {
     private String trainName;
+    private String startStation;
+    private String endStation;
     private int trainId;
     private int totalSeats;
     private HashMap<ClassType, HashMap<BerthPreference, Integer>> seatCounts;
     private String dateOfTrain;
 
-    public Train(String trainName, int trainId, int totalSeats,String dateOfTrain) {
+    public Train(String trainName, int trainId,String startStation, String endStation, int totalSeats,String dateOfTrain) {
         this.trainName = trainName;
         this.trainId = trainId;
+        this.startStation = startStation;
+        this.endStation = endStation;
         this.totalSeats = totalSeats;
         this.seatCounts = new HashMap<>();
         this.dateOfTrain = dateOfTrain;
@@ -38,7 +42,22 @@ public class Train {
     public String getTrainName() {
         return trainName;
     }
+    
+    public String getStartStation() {
+        return startStation;
+    }
 
+    public void setEndStation() {
+        this.endStation = endStation;
+    }
+    
+    public void setStartStation() {
+        this.startStation = startStation;
+    }
+
+    public String getEndStation() {
+        return endStation;
+    }
     public int getSeatCount(ClassType classType, BerthPreference berthPreference) {
         return seatCounts.get(classType).getOrDefault(berthPreference, 0);
     }

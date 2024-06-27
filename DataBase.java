@@ -56,23 +56,23 @@ public class DataBase {
         tickets.add(new Ticket("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
         tickets.add(new Ticket("Bumrah", "male", 34, BerthPreference.SU, ClassType.A3));
 
-        trains.add(new Train("Chennai Express", 1, 8, "03/07/2024"));
-        trains.add(new Train("Coimbatore Express", 2, 8, "05/07/2024"));
-        trains.add(new Train("Salem Express", 3, 8, "06/07/2024"));
-        trains.add(new Train("Tirunelveli Express", 4, 8, "01/02/2024"));
-        trains.add(new Train("Vellore Express", 5, 8, "07/07/2024"));
-        trains.add(new Train("Malli Express", 6, 8, "10/07/2024"));
+        trains.add(new Train("Chennai Express", 1,"Kanniyakumari","Delhi", 8, "03/07/2024"));
+        trains.add(new Train("Coimbatore Express", 2,"Gujarat","Hydrabat",8, "05/07/2024"));
+        trains.add(new Train("Salem Express", 3,"Delhi","Kanniyakumari", 8, "06/07/2024"));
+        trains.add(new Train("Tirunelveli Express",4,"Hydrabat","Gujarat", 8, "01/02/2024"));
+        trains.add(new Train("Vellore Express", 5,"Bangalore","Panjab", 8, "07/07/2024"));
+        trains.add(new Train("Malli Express", 6,"Panjab","Bangalore", 8, "10/07/2024"));
 
         users.add(new User("Maha", "Maha@123", User.Role.ADMIN));
         users.add(new User("Bhu", "Bhu@123", User.Role.USER));
         users.add(new User("Go", "Go@123", User.Role.ADMIN));
 
-        routes.add(new Route(1,t1));
-        routes.add(new Route(2,t2));
-        routes.add(new Route(3,t3));
-        routes.add(new Route(4,t4));
-        routes.add(new Route(5,t5));
-        routes.add(new Route(6,t6));
+        routes.add(new Route(1, t1, "Kanniyakumari", "Delhi"));
+        routes.add(new Route(2, t2, "Gujarat", "Hyderabad"));
+        routes.add(new Route(3, t3, "Delhi", "Kanniyakumari"));
+        routes.add(new Route(4, t4, "Hyderabad", "Gujarat"));
+        routes.add(new Route(5, t5, "Bangalore", "Punjab"));
+        routes.add(new Route(6, t6, "Punjab", "Bangalore"));
     }
 
     public List<Ticket> getTickets() {
@@ -86,6 +86,7 @@ public class DataBase {
     public List<User> getUsers() {
         return users;
     }
+    
     public List<Route> getRoutes() {
         return routes;
     }
