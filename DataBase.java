@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class DataBase {
@@ -5,6 +6,7 @@ public class DataBase {
     public List<Train> trains;
     public List<User> users;
     public List<Route> routes;
+
     public static HashMap<String, Integer> t1 = new HashMap<>();
     public static HashMap<String, Integer> t2 = new HashMap<>();
     public static HashMap<String, Integer> t3 = new HashMap<>();
@@ -56,12 +58,7 @@ public class DataBase {
         tickets.add(new Ticket("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
         tickets.add(new Ticket("Bumrah", "male", 34, BerthPreference.SU, ClassType.A3));
 
-        trains.add(new Train("Chennai Express", 1,"Kanniyakumari","Delhi", 8, "03/07/2024"));
-        trains.add(new Train("Coimbatore Express", 2,"Gujarat","Hydrabat",8, "05/07/2024"));
-        trains.add(new Train("Salem Express", 3,"Delhi","Kanniyakumari", 8, "06/07/2024"));
-        trains.add(new Train("Tirunelveli Express",4,"Hydrabat","Gujarat", 8, "01/02/2024"));
-        trains.add(new Train("Vellore Express", 5,"Bangalore","Panjab", 8, "07/07/2024"));
-        trains.add(new Train("Malli Express", 6,"Panjab","Bangalore", 8, "10/07/2024"));
+        readTrainsFromCSV("data.csv");
 
         users.add(new User("Maha", "Maha@123", User.Role.ADMIN));
         users.add(new User("Bhu", "Bhu@123", User.Role.USER));
@@ -73,6 +70,34 @@ public class DataBase {
         routes.add(new Route(4, t4, "Hyderabad", "Gujarat"));
         routes.add(new Route(5, t5, "Bangalore", "Punjab"));
         routes.add(new Route(6, t6, "Punjab", "Bangalore"));
+    }
+
+    public void readTrainsFromCSV(String filePath) {
+        String line = "";
+        String d = ",";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(d);
+
+                int trainId = Integer.parseInt(data[0]);  
+                String trainName = data[1];               
+                String startStation = data[2];            
+                String endStation = data[3];              
+                int availableSeats = Integer.parseInt(data[4]);  
+                String dateOfTrain = data[5];            
+
+                Train train = new Train(trainName, trainId, startStation, endStation, availableSeats, dateOfTrain);
+                trains.add(train);
+            }
+        } 
+        catch (IOException e) {
+            e.printStackTrace();
+        } 
+        catch (NumberFormatException e) {
+            System.err.println("Error parsing integer from CSV: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public List<Ticket> getTickets() {

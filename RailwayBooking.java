@@ -13,6 +13,16 @@ public class RailwayBooking {
 
     public boolean bookTheTicket(String username, String name, String gender, int age, BerthPreference berthPreference, ClassType classType, String from, String to, String trainName) {
         List<Train> availableTrains = checkTrains(from, to);
+
+        if (availableTrains.isEmpty()) {
+            System.out.println("No trains available between " + from + " and " + to);
+        } else {
+            System.out.println("Trains available between " + from+ " and " + to+ ":");
+            for (Train train : availableTrains) {
+                System.out.println(train);
+            }
+        }
+
         boolean isFound = false;
         for (Train t : availableTrains) {
             if (trainName.equals(t.getTrainName()) && isSeatAvailable(t, classType, berthPreference)) {
@@ -57,21 +67,26 @@ public class RailwayBooking {
     public void bookSeat(Train train, ClassType classType, BerthPreference berthPreference) {
         train.setSeatCount(classType, berthPreference, train.getSeatCount(classType, berthPreference) - 1);
     }
-
     public List<Train> checkTrains(String from, String to) {
-        List<Train> tempTrain = new ArrayList<>();
+        List<Train> matchingTrains = new ArrayList<>();
+
         for (Route route : db.getRoutes()) {
-            if (route.getAllStation().containsKey(from) && route.getAllStation().containsKey(to)
-                && route.getAllStation().get(from) < route.getAllStation().get(to)) {
+            Map<String, Integer> stations = route.getAllStation();
+
+            if (stations.containsKey(from) && stations.containsKey(to) && stations.get(from) < stations.get(to)) {
                 for (Train train : db.getTrains()) {
                     if (train.getTrainId() == route.getRouteId()) {
-                        tempTrain.add(train);
+                        matchingTrains.add(train);
                     }
                 }
             }
         }
-        return tempTrain;
+
+        return matchingTrains;
     }
+
+
+
 
     public boolean cancelTheTicket(String name) {
         for (Ticket e : db.getTickets()) {

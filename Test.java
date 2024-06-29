@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Test {
     
     public static void main(String[] args) {
-        //User u = new User();
+        
         RailwayBooking p = new RailwayBooking();
         Scanner input = new Scanner(System.in);
-
+        Route r = new Route();
         while (true) {
             System.out.println("Enter username:");
             String username = input.nextLine();
@@ -102,6 +102,8 @@ public class Test {
             System.out.println("Enter to station:");
             String to = input.nextLine();
             List<Train> trains = p.checkTrains(from, to);
+            System.out.println(trains);
+            
             if (trains.size() > 0) {
                 System.out.println("Available trains are:");
                 for (Train t : trains) {
