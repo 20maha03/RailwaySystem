@@ -1,0 +1,6 @@
+﻿"Train Name,Train ID,From Station,To Station,Intermediate Stations"
+"Chennai Express,12601,Chennai Central,Coimbatore Junction,Katpadi Junction, Jolarpettai, Salem, Erode Junction, Tiruppur"
+"Mysuru Express,16232,Chennai Central,Tiruchirappalli,Chengalpattu, Villupuram, Cuddalore Port Junction, Chidambaram, Mayiladuturai Junction, Thanjavur"
+"Madurai Express,16127,Chennai Egmore,Madurai Junction,Tambaram, Chengalpattu, Villupuram, Vriddhachalam, Tiruchirappalli, Dindigul"
+"Nilgiri Express,12671,Chennai Central,Coimbatore Junction,Arakkonam, Katpadi Junction, Jolarpettai, Salem, Erode Junction"
+"Palaruvi Express,16792,Palani,Tirunelveli,Dindigul, Madurai, Virudhunagar, Sattur, Kovilpatti"
