@@ -13,7 +13,7 @@ public class RailwayBooking {
 
     public boolean bookTheTicket(String username, String name, String gender, int age, BerthPreference berthPreference, ClassType classType, String from, String to, String trainName) {
         List<Train> availableTrains = checkTrains(from, to);
-        boolean isFound = false;
+        System.out.println("available:"+availableTrains);
         if (availableTrains.isEmpty()) {
             System.out.println("No trains available between " + from + " and " + to);
         } 
@@ -39,7 +39,7 @@ public class RailwayBooking {
                         }
                     }
                     tempTickets.add(new Ticket(name, gender, age, berthPreference, classType));
-                    isFound = true;
+                    return true;
                 }
                else {
                     waitingListTickets.add(new Ticket(name, gender, age, berthPreference, classType));
@@ -47,7 +47,7 @@ public class RailwayBooking {
             }
         }
         
-        return isFound;
+        return false;
     }
 
     public List<String> getUserTickets(String username) {
