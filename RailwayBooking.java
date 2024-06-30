@@ -69,16 +69,19 @@ public class RailwayBooking {
     public void bookSeat(Train train, ClassType classType, BerthPreference berthPreference) {
         train.setSeatCount(classType, berthPreference, train.getSeatCount(classType, berthPreference) - 1);
     }
+
     public List<Train> checkTrains(String from, String to) {
         List<Train> matchingTrains = new ArrayList<>();
-
-        for (Route route : db.getRoutes()) {
-            Map<String, Integer> stations = route.getAllStation();
-            if (stations.containsKey(from) && stations.containsKey(to) && stations.get(from) < stations.get(to)) {
-                for (Train train : db.getTrains()) {
-                    if (train.getTrainId() == route.getRouteId()) {
-                        matchingTrains.add(train);
-                    }
+        Map<Integer,Route> map = db.getRouteMap();
+        System.out.println("hi"+map);
+        for (Train train : db.getTrains()) {
+            System.out.println("val"+train.getRouteId());
+            Route route = map.get(train.getRouteId());
+            System.out.println("maha"+route);
+            if (route != null) {
+                Map<String, Integer> stations = route.getAllStation();
+                if (stations.containsKey(from) && stations.containsKey(to) && stations.get(from) < stations.get(to)) {
+                    matchingTrains.add(train);
                 }
             }
         }
@@ -143,7 +146,7 @@ public class RailwayBooking {
             if (t.getTrainName().equals(nameOfTheTrain)) {
                 db.trains.remove(t);
                 for (Route r : db.getRoutes()) {
-                    if (r.getRouteId() == t.getTrainId()) {
+                    if (r.getRouteId() == t.getRouteId()) {
                         db.routes.remove(r);
                         break;
                     }

@@ -6,6 +6,7 @@ public class DataBase {
     public List<Train> trains;
     public List<User> users;
     public List<Route> routes;
+    public Map<Integer, Route> routeMap; 
 
     public static HashMap<String, Integer> t1 = new HashMap<>();
     public static HashMap<String, Integer> t2 = new HashMap<>();
@@ -53,6 +54,7 @@ public class DataBase {
         trains = new ArrayList<>();
         users = new ArrayList<>();
         routes = new ArrayList<>();
+        routeMap = new HashMap<>(); 
 
         tickets.add(new Ticket("Virat Kohli", "male", 32, BerthPreference.UB, ClassType.A1));
         tickets.add(new Ticket("Dhoni", "male", 41, BerthPreference.LB, ClassType.A2));
@@ -64,12 +66,12 @@ public class DataBase {
         users.add(new User("Bhu", "Bhu@123", User.Role.USER));
         users.add(new User("Go", "Go@123", User.Role.ADMIN));
 
-        routes.add(new Route(2, t2, "Gujarat", "Hyderabad"));
-        routes.add(new Route(3, t3, "Delhi", "Kanniyakumari"));
-        routes.add(new Route(4, t4, "Hyderabad", "Gujarat"));
-        routes.add(new Route(5, t5, "Bangalore", "Punjab"));
-        routes.add(new Route(6, t6, "Punjab", "Bangalore"));
-        routes.add(new Route(1, t1, "Kanniyakumari", "Delhi"));
+        addRoute(new Route(1, t1, "Kanniyakumari", "Delhi"));
+        addRoute(new Route(2, t2, "Gujarat", "Hyderabad"));
+        addRoute(new Route(3, t3, "Delhi", "Kanniyakumari"));
+        addRoute(new Route(4, t4, "Hyderabad", "Gujarat"));
+        addRoute(new Route(5, t5, "Bangalore", "Punjab"));
+        addRoute(new Route(6, t6, "Punjab", "Bangalore"));
     }
 
     public void readTrainsFromCSV(String filePath) {
@@ -86,14 +88,14 @@ public class DataBase {
                 }
 
 
-                int trainId = Integer.parseInt(data[1].trim());
+                int routeId = Integer.parseInt(data[1].trim());
                 String trainName = data[0].trim();
                 String startStation = data[2].trim();
                 String endStation = data[3].trim();
                 int availableSeats = Integer.parseInt(data[4].trim());
                 String dateOfTrain = data[5].trim();
 
-                Train train = new Train(trainName, trainId, startStation, endStation, availableSeats, dateOfTrain);
+                Train train = new Train(trainName, routeId, startStation, endStation, availableSeats, dateOfTrain);
                 trains.add(train);
     
             }
@@ -106,6 +108,11 @@ public class DataBase {
             e.printStackTrace();
         }
     }
+    public void addRoute(Route route) {
+        routes.add(route);
+        routeMap.put(route.getRouteId(), route); 
+    }
+
 
     public List<Ticket> getTickets() {
         return tickets;
@@ -121,6 +128,10 @@ public class DataBase {
 
     public List<Route> getRoutes() {
         return routes;
+    }
+
+    public Map<Integer,Route> getRouteMap() {
+        return routeMap;
     }
 
 

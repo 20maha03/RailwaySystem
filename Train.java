@@ -4,14 +4,14 @@ public class Train {
     private String trainName;
     private String startStation;
     private String endStation;
-    private int trainId;
+    private int routeId;
     private int totalSeats;
     private HashMap<ClassType, HashMap<BerthPreference, Integer>> seatCounts;
     private String dateOfTrain;
 
-    public Train(String trainName, int trainId,String startStation, String endStation, int totalSeats,String dateOfTrain) {
+    public Train(String trainName, int routeId,String startStation, String endStation, int totalSeats,String dateOfTrain) {
         this.trainName = trainName;
-        this.trainId = trainId;
+        this.routeId = routeId;
         this.startStation = startStation;
         this.endStation = endStation;
         this.totalSeats = totalSeats;
@@ -27,8 +27,8 @@ public class Train {
         }
     }
 
-    public int getTrainId() {
-        return trainId;
+    public int getRouteId() {
+        return routeId;
     }
 
     public int getTotalSeats() {
@@ -75,7 +75,7 @@ public class Train {
         StringBuilder sb = new StringBuilder();
         sb.append("trainName = ").append(trainName)
             .append(",\r\n")
-            .append(" train id = ").append(trainId)
+            .append(" train id = ").append(routeId)
             .append(",\r\n")
             .append("totalSeats = ").append(totalSeats)
             .append(",\r\n")
