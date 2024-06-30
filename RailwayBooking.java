@@ -45,9 +45,6 @@ public class RailwayBooking {
                     waitingListTickets.add(new Ticket(name, gender, age, berthPreference, classType));
                 }  
             }
-            else {
-                isFound = false;
-            }
         }
         
         return isFound;
@@ -73,11 +70,8 @@ public class RailwayBooking {
     public List<Train> checkTrains(String from, String to) {
         List<Train> matchingTrains = new ArrayList<>();
         Map<Integer,Route> map = db.getRouteMap();
-        System.out.println("hi"+map);
         for (Train train : db.getTrains()) {
-            System.out.println("val"+train.getRouteId());
             Route route = map.get(train.getRouteId());
-            System.out.println("maha"+route);
             if (route != null) {
                 Map<String, Integer> stations = route.getAllStation();
                 if (stations.containsKey(from) && stations.containsKey(to) && stations.get(from) < stations.get(to)) {

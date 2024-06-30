@@ -1,11 +1,8 @@
 import java.util.*;
 
-import java.util.Scanner;
-
 public class Test {
-    
+
     public static void main(String[] args) {
-        
         RailwayBooking p = new RailwayBooking();
         Scanner input = new Scanner(System.in);
         while (true) {
@@ -18,8 +15,8 @@ public class Test {
                 String str = input.nextLine();
                 switch (str) {
                     case "1":
-                       addTrain(input, p);
-                       break;
+                        addTrain(input, p);
+                        break;
                     case "2":
                         deleteTrain(input, p);
                         break;
@@ -33,8 +30,7 @@ public class Test {
                         System.out.println("Invalid option. Please try again.");
                         break;
                 }
-            }
-            else {
+            } else {
                 System.out.println("1. Login and Book\n2. Cancel\n3. View All Booked Passengers\n4. View My Tickets\n5. Exit");
                 String str = input.nextLine();
                 switch (str) {
@@ -48,7 +44,7 @@ public class Test {
                         viewAllTicket(p);
                         break;
                     case "4":
-                        viewMyTickets(input,p);
+                        viewMyTickets(username, password, input, p);
                         break;
                     case "5":
                         System.out.println("Exiting...");
@@ -61,17 +57,18 @@ public class Test {
             }
         }
     }
+
     private static void addTrain(Scanner input, RailwayBooking p) {
         System.out.println("Enter name of the train:");
         String nameOfTheTrain = input.nextLine();
         System.out.println("Enter number of the stations:");
         int numberOfStations = input.nextInt();
-        input.nextLine(); 
+        input.nextLine();
         String[] arr = new String[numberOfStations];
         HashMap<String, Integer> trainInterMediateStation = new HashMap<>();
-        System.out.println("Enter start station");
+        System.out.println("Enter start station:");
         String startStation = input.nextLine();
-        System.out.println("enter end station");
+        System.out.println("Enter end station:");
         String endStation = input.nextLine();
         System.out.println("Enter station names:");
         for (int i = 0; i < numberOfStations; i++) {
@@ -82,16 +79,18 @@ public class Test {
         }
         System.out.println("Enter available seats:");
         int availableSeats = input.nextInt();
-        input.nextLine(); 
+        input.nextLine();
         System.out.println("Enter date (YYYY-MM-DD):");
         String dateOfTrain = input.nextLine();
-        p.addNewTrain(nameOfTheTrain,startStation, endStation,trainInterMediateStation, availableSeats, dateOfTrain);
+        p.addNewTrain(nameOfTheTrain, startStation, endStation, trainInterMediateStation, availableSeats, dateOfTrain);
+        System.out.println("Train added successfully.");
     }
 
     private static void deleteTrain(Scanner input, RailwayBooking p) {
         System.out.println("Enter name of the train:");
         String nameOfTheTrain = input.nextLine();
         p.deleteTrain(nameOfTheTrain);
+        System.out.println("Train deleted successfully.");
     }
 
     private static void bookTicket(String username, String password, Scanner input, RailwayBooking p) {
@@ -101,7 +100,7 @@ public class Test {
             System.out.println("Enter to station:");
             String to = input.nextLine();
             List<Train> trains = p.checkTrains(from, to);
-            
+
             if (trains.size() > 0) {
                 System.out.println("Available trains are:");
                 for (Train t : trains) {
@@ -109,16 +108,28 @@ public class Test {
                 }
                 System.out.println("Enter train name:");
                 String trainName = input.nextLine();
+                boolean trainExists = false;
+                for (Train t : trains) {
+                    if (trainName.equals(t.getTrainName())) {
+                        trainExists = true;
+                        break;
+                    }
+                }
+                if (!trainExists) {
+                    System.out.println("Invalid train name.");
+                    return;
+                }
+
                 System.out.println("Enter name:");
                 String name = input.nextLine();
                 System.out.println("Enter age:");
                 int age = input.nextInt();
-                input.nextLine(); 
+                input.nextLine();
                 System.out.println("Enter gender:");
                 String gender = input.nextLine();
                 System.out.println("Enter berth preference: 1.UB, 2.MB, 3.LB, 4.SU, 5.SL");
                 int bpChoice = input.nextInt();
-                input.nextLine(); 
+                input.nextLine();
                 BerthPreference berthPreference = getBerthPreference(bpChoice);
                 if (berthPreference == null) {
                     System.out.println("Invalid berth preference.");
@@ -126,22 +137,18 @@ public class Test {
                 }
                 System.out.println("Enter class type: 1.SL, 2.A3, 3.A2, 4.A1");
                 int ctChoice = input.nextInt();
-                input.nextLine(); 
+                input.nextLine();
                 ClassType classType = getClassType(ctChoice);
                 if (classType == null) {
                     System.out.println("Invalid class type.");
                     return;
                 }
+
                 if (p.bookTheTicket(username, name, gender, age, berthPreference, classType, from, to, trainName)) {
                     System.out.println("Ticket booked successfully.");
                 } 
                 else {
-                    for (Train t : trains) {
-                        if (trainName.equals(t.getTrainName())) {
-                            System.out.println("Booking failed. Added to waiting list.");
-                        }
-                    }
-                    System.out.println(" in valid train.");
+                    System.out.println("Booking failed. Added to waiting list.");
                 }
             } 
             else {
@@ -190,66 +197,64 @@ public class Test {
         String cancelName = input.nextLine();
         if (p.cancelTheTicket(cancelName)) {
             System.out.println("Ticket cancelled successfully.");
-        } else {
+        } 
+        else {
             System.out.println("Cancellation failed. Passenger not found.");
         }
     }
 
     private static void viewAllTicket(RailwayBooking p) {
-       List<Ticket> tickets = p.getAllTickets();
-       List<Ticket> waitListTickets = p.waitingListTickets;
-        if (!tickets.isEmpty() && tickets != null ) {
-           System.out.println("All Passengers");
-           for (int i = 0; i < tickets.size(); i++) {
-               System.out.print(tickets.get(i));
-           }
-           if (!waitListTickets.isEmpty()) {
-                System.out.println("All waiting list  Passengers");
-                for (int i = 0; i < waitListTickets.size(); i++) {
-                    System.out.print(waitListTickets.get(i));
-                
+        List<Ticket> tickets = p.getAllTickets();
+        List<Ticket> waitListTickets = p.waitingListTickets; 
+        if (tickets != null && !tickets.isEmpty()) {
+            System.out.println("All Passengers:");
+            for (Ticket t : tickets) {
+                System.out.println(t);
+            }
+            if (waitListTickets != null && !waitListTickets.isEmpty()) {
+                System.out.println("All waiting list Passengers:");
+                for (Ticket t : waitListTickets) {
+                    System.out.println(t);
                 }
             }
-        }
-       
-        else {
-            System.out.println("No passengers");
         } 
+        else {
+            System.out.println("No passengers.");
+        }
     }
 
-    private static void viewMyTickets(Scanner input, RailwayBooking p) {
-        System.out.println("Enter username:");
-        String userToView = input.nextLine();
-        System.out.println("Enter password:");
-        String passToView = input.nextLine();
-        if (p.toLogin(userToView, passToView)) {
-            List<String> userTickets = p.getUserTickets(userToView);
-            System.out.println("Your Tickets: " + userTickets);
+    private static void viewMyTickets(String username, String password, Scanner input, RailwayBooking p) {
+        if (p.toLogin(username, password)) {
+            List<String> userTickets = p.getUserTickets(username);
+            System.out.println("Your Tickets:");
+            for (String t : userTickets) {
+                System.out.println(t);
+            }
         } 
         else {
             System.out.println("Invalid username or password.");
         }
     }
-    
+
     public static void addUser(Scanner input, RailwayBooking p) {
         System.out.println("Enter user name:");
         String username = input.nextLine();
-        System.out.println("Enter password");
+        System.out.println("Enter password:");
         String password = input.nextLine();
-        System.out.println("1.Admin/n2.User");
+        System.out.println("1. Admin\n2. User");
         int roleChoice = input.nextInt();
-        input.nextLine(); 
+        input.nextLine();
         User.Role role = User.getRole(roleChoice);
-        p.addNewUser(username,password,role);
-        System.out.println("succussfully added");
+        p.addNewUser(username, password, role);
+        System.out.println("Successfully added.");
     }
 
     public static void deleteUser(Scanner input, RailwayBooking p) {
         System.out.println("Enter user name:");
         String username = input.nextLine();
-        System.out.println("Enter password");
+        System.out.println("Enter password:");
         String password = input.nextLine();
-        p.deleteUser(username,password);
-        System.out.println("succussfully deleted");
+        p.deleteUser(username, password);
+        System.out.println("Successfully deleted.");
     }
 }

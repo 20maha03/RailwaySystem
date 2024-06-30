@@ -35,16 +35,19 @@ public class Route {
         this.routes = routes;
     }
     public Map<String, Integer> getAllStation() {
-        stations.clear();
-        stations.put(startStation, 0);
+        Map<String, Integer> orderedStations = new LinkedHashMap<>();
+        orderedStations.put(startStation, 0);
+
         int index = 1;
-        for (Map.Entry<String, Integer> entry : routes.entrySet()) {
-            stations.put(entry.getKey(), index++);
+        for (Map.Entry<String, Integer> entry : stations.entrySet()) {
+            if (!entry.getKey().equals(startStation) && !entry.getKey().equals(endStation)) {
+                orderedStations.put(entry.getKey(), index++);
+            }
         }
-        stations.put(endStation, index);
-        System.out.println("maha"+stations);
-        return stations;
-        
+
+        orderedStations.put(endStation, index);
+
+        return orderedStations;
     }
 
     @Override
