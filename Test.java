@@ -136,27 +136,34 @@ public class Test {
                 System.out.println("Enter gender:");
                 String gender = input.nextLine();
                 System.out.println("Enter berth preference: 1.UB, 2.MB, 3.LB, 4.SU, 5.SL");
-                int bpChoice = input.nextInt();
-                input.nextLine();
-                BerthPreference berthPreference = getBerthPreference(bpChoice);
-                if (berthPreference == null) {
-                    System.out.println("Invalid berth preference.");
-                    return;
-                }
-                System.out.println("Enter class type: 1.SL, 2.A3, 3.A2, 4.A1");
-                int ctChoice = input.nextInt();
-                input.nextLine();
-                ClassType classType = getClassType(ctChoice);
-                if (classType == null) {
-                    System.out.println("Invalid class type.");
-                    return;
-                }
+                
+                try {
+                    int bpChoice = input.nextInt();
+                    input.nextLine();
+                    BerthPreference berthPreference = getBerthPreference(bpChoice);
+                    if (berthPreference == null) {
+                        System.out.println("Invalid berth preference.");
+                        return;
+                    }
+                    System.out.println("Enter class type: 1.SL, 2.A3, 3.A2, 4.A1");
+                    int ctChoice = input.nextInt();
+                    input.nextLine();
+                    ClassType classType = getClassType(ctChoice);
+                    if (classType == null) {
+                        System.out.println("Invalid class type.");
+                        return;
+                    }
 
-                if (p.bookTheTicket(username, name, gender, age, berthPreference, classType, from, to, trainName)) {
-                    System.out.println("Ticket booked successfully.");
+                    if (p.bookTheTicket(username, name, gender, age, berthPreference, classType, from, to, trainName)) {
+                        System.out.println("Ticket booked successfully.");
+                    } 
+                    else {
+                        System.out.println("Booking failed. Added to waiting list.");
+                    }
                 } 
-                else {
-                    System.out.println("Booking failed. Added to waiting list.");
+                catch (InputMismatchException e) {
+                    System.err.println("Invalid input. Please enter the correct type of data.");
+                    input.nextLine();
                 }
             } 
             else {
@@ -167,6 +174,7 @@ public class Test {
             System.out.println("Invalid username or password.");
         }
     }
+    
 
     private static BerthPreference getBerthPreference(int choice) {
         switch (choice) {
