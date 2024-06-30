@@ -77,24 +77,31 @@ public class DataBase {
         String d = ",";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(d);
 
-                int trainId = Integer.parseInt(data[0]);  
-                String trainName = data[1];               
-                String startStation = data[2];            
-                String endStation = data[3];              
-                int availableSeats = Integer.parseInt(data[4]);  
-                String dateOfTrain = data[5];            
+                if (data.length != 6) {
+                    throw new IOException("Invalid data length: expected 6 columns, found " + data.length);
+                }
+
+
+                int trainId = Integer.parseInt(data[1].trim());
+                String trainName = data[0].trim();
+                String startStation = data[2].trim();
+                String endStation = data[3].trim();
+                int availableSeats = Integer.parseInt(data[4].trim());
+                String dateOfTrain = data[5].trim();
 
                 Train train = new Train(trainName, trainId, startStation, endStation, availableSeats, dateOfTrain);
                 trains.add(train);
+    
             }
         } 
         catch (IOException e) {
             e.printStackTrace();
         } 
-        catch (NumberFormatException e) {
+        catch (NumberFormatException  e) {
             System.err.println("Error parsing integer from CSV: " + e.getMessage());
             e.printStackTrace();
         }
@@ -111,8 +118,10 @@ public class DataBase {
     public List<User> getUsers() {
         return users;
     }
-    
+
     public List<Route> getRoutes() {
         return routes;
     }
+
+
 }

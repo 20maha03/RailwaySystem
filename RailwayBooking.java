@@ -13,41 +13,43 @@ public class RailwayBooking {
 
     public boolean bookTheTicket(String username, String name, String gender, int age, BerthPreference berthPreference, ClassType classType, String from, String to, String trainName) {
         List<Train> availableTrains = checkTrains(from, to);
-
+        boolean isFound = false;
         if (availableTrains.isEmpty()) {
             System.out.println("No trains available between " + from + " and " + to);
-        } else {
+        } 
+        else {
             System.out.println("Trains available between " + from+ " and " + to+ ":");
             for (Train train : availableTrains) {
                 System.out.println(train);
             }
         }
-
-        boolean isFound = false;
         for (Train t : availableTrains) {
-            if (trainName.equals(t.getTrainName()) && isSeatAvailable(t, classType, berthPreference)) {
-            
-                bookSeat(t, classType, berthPreference);
-                Ticket newTicket = new Ticket(name, gender, age, berthPreference, classType);
-                db.tickets.add(newTicket);
-                String ticketKey = generateTicketKey(to, classType, seatNumber++, berthPreference);
-                System.out.println("Ticket id: " + ticketKey);
-                bookedTickets.put(ticketKey, count++);
+            if (trainName.equals(t.getTrainName())) {
+               if (isSeatAvailable(t, classType, berthPreference)) {
+                    bookSeat(t, classType, berthPreference);
+                    Ticket newTicket = new Ticket(name, gender, age, berthPreference, classType);
+                    db.tickets.add(newTicket);
+                    String ticketKey = generateTicketKey(to, classType, seatNumber++, berthPreference);
+                    System.out.println("Ticket id: " + ticketKey);
+                    bookedTickets.put(ticketKey, count++);
 
-                for (User user : db.getUsers()) {
-                    if (user.getUserName().equals(username)) {
-                        user.addTicket(ticketKey);
+                    for (User user : db.getUsers()) {
+                        if (user.getUserName().equals(username)) {
+                            user.addTicket(ticketKey);
+                        }
                     }
+                    tempTickets.add(new Ticket(name, gender, age, berthPreference, classType));
+                    isFound = true;
                 }
-                isFound = true;
+               else {
+                    waitingListTickets.add(new Ticket(name, gender, age, berthPreference, classType));
+                }  
+            }
+            else {
+                isFound = false;
             }
         }
-        if(isFound) {
-            tempTickets.add(new Ticket(name, gender, age, berthPreference, classType));
-        }
-        else {
-            waitingListTickets.add(new Ticket(name, gender, age, berthPreference, classType));
-        }
+        
         return isFound;
     }
 
@@ -84,9 +86,6 @@ public class RailwayBooking {
 
         return matchingTrains;
     }
-
-
-
 
     public boolean cancelTheTicket(String name) {
         for (Ticket e : db.getTickets()) {

@@ -8,7 +8,6 @@ public class Test {
         
         RailwayBooking p = new RailwayBooking();
         Scanner input = new Scanner(System.in);
-        Route r = new Route();
         while (true) {
             System.out.println("Enter username:");
             String username = input.nextLine();
@@ -138,7 +137,12 @@ public class Test {
                     System.out.println("Ticket booked successfully.");
                 } 
                 else {
-                    System.out.println("Booking failed. Added to waiting list.");
+                    for (Train t : trains) {
+                        if (trainName.equals(t.getTrainName())) {
+                            System.out.println("Booking failed. Added to waiting list.");
+                        }
+                    }
+                    System.out.println(" in valid train.");
                 }
             } 
             else {

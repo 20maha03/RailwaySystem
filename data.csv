@@ -1,7 +1,6 @@
-"Train Name,Train ID,From Station,To Station,Duration,Date"
-"Chennai Express,1,Kanniyakumari,Delhi,8,03/07/2024"
-"Coimbatore Express,2,Gujarat,Hyderabad,8,05/07/2024"
-"Salem Express,3,Delhi,Kanniyakumari,8,06/07/2024"
-"Tirunelveli Express,4,Hyderabad,Gujarat,8,01/02/2024"
-"Vellore Express,5,Bangalore,Punjab,8,07/07/2024"
-"Malli Express,6,Punjab,Bangalore,8,10/07/2024"
+﻿Chennai Express,1,Kanniyakumari,Delhi,8,03/07/2024
+Coimbatore Express,2,Gujarat,Hyderabad,8,05/07/2024
+Salem Express,3,Delhi,Kanniyakumari,8,06/07/2024
+Tirunelveli Express,4,Hyderabad,Gujarat,8,01/02/2024
+Vellore Express,5,Bangalore,Punjab,8,07/07/2024
+Malli Express,6,Punjab,Bangalore,8,10/07/2024
