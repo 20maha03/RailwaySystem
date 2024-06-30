@@ -124,9 +124,11 @@ public class RailwayBooking {
             if (a.getUserName().equals(username) && a.getPassword().equals(password) && role.equals("Admin")) {
                 return true;
             }
+            
         }
         return false;
     }
+
 
     public void addNewTrain( String nameOfTheTrain,String startStation, String endStation, HashMap<String, Integer> interMediateStation,int availableSeats, String dateOfTrain) {
         Train newTrain = new Train(nameOfTheTrain,db.getTrains().size() + 1, startStation, endStation, availableSeats, dateOfTrain);
@@ -167,4 +169,13 @@ public class RailwayBooking {
             }
         }
     }
+    public boolean checkValidUserOrAdmin(String username, String password) {
+        for (User a : db.getUsers()) {
+            if (a.getUserName().equals(username) && a.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

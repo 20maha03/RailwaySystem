@@ -10,6 +10,12 @@ public class Test {
             String username = input.nextLine();
             System.out.println("Enter password:");
             String password = input.nextLine();
+            
+            if (!p.checkValidUserOrAdmin(username, password)) {
+                System.out.println("Invalid username or password.");
+                continue; 
+            }
+            
             if (p.isAdmin(username, password)) {
                 System.out.println("1. Add Train\n2. Delete Train\n3. Add user\n4. Delete user");
                 String str = input.nextLine();
@@ -30,7 +36,8 @@ public class Test {
                         System.out.println("Invalid option. Please try again.");
                         break;
                 }
-            } else {
+            } 
+            else {
                 System.out.println("1. Login and Book\n2. Cancel\n3. View All Booked Passengers\n4. View My Tickets\n5. Exit");
                 String str = input.nextLine();
                 switch (str) {
@@ -55,6 +62,7 @@ public class Test {
                         break;
                 }
             }
+           
         }
     }
 
