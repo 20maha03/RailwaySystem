@@ -101,7 +101,6 @@ public class Test {
             System.out.println("Enter to station:");
             String to = input.nextLine();
             List<Train> trains = p.checkTrains(from, to);
-            System.out.println(trains);
             
             if (trains.size() > 0) {
                 System.out.println("Available trains are:");

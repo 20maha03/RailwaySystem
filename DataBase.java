@@ -64,12 +64,12 @@ public class DataBase {
         users.add(new User("Bhu", "Bhu@123", User.Role.USER));
         users.add(new User("Go", "Go@123", User.Role.ADMIN));
 
-        routes.add(new Route(1, t1, "Kanniyakumari", "Delhi"));
         routes.add(new Route(2, t2, "Gujarat", "Hyderabad"));
         routes.add(new Route(3, t3, "Delhi", "Kanniyakumari"));
         routes.add(new Route(4, t4, "Hyderabad", "Gujarat"));
         routes.add(new Route(5, t5, "Bangalore", "Punjab"));
         routes.add(new Route(6, t6, "Punjab", "Bangalore"));
+        routes.add(new Route(1, t1, "Kanniyakumari", "Delhi"));
     }
 
     public void readTrainsFromCSV(String filePath) {

@@ -74,7 +74,6 @@ public class RailwayBooking {
 
         for (Route route : db.getRoutes()) {
             Map<String, Integer> stations = route.getAllStation();
-
             if (stations.containsKey(from) && stations.containsKey(to) && stations.get(from) < stations.get(to)) {
                 for (Train train : db.getTrains()) {
                     if (train.getTrainId() == route.getRouteId()) {
